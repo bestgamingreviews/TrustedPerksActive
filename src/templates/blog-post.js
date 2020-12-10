@@ -110,7 +110,9 @@ export const BlogPostTemplate = (props) => {
                   <PostComps.PTitle hlevel="3" title={item.name} />
                   <PostComps.PImage alt={item.name} src={item.image?.base} />
                   <PostComps.SpecTable spec={item.specs} />
-                  {item.body}
+                  <MDXProvider components={PostComps}>
+                    <MDXRenderer>{item.body}</MDXRenderer>
+                  </MDXProvider>
                   <PostComps.ProsNCons pros={item.pros} cons={item.cons} />
                   <PostComps.BButton link={item.link} />
                 </div>

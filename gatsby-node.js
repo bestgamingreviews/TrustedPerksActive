@@ -282,6 +282,11 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
     type MdxFrontmatter {
       beforebody: String @mdx
       afterbody: String @mdx
+      products: [MdxBody]
+    }
+
+    type MdxBody {
+      body: String @mdx
     }
   `);
 };

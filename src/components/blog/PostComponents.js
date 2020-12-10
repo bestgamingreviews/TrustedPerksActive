@@ -180,7 +180,7 @@ export const ProductsTable = ({ products }) => {
     <table className="tablepress table_s1">
       <thead>
         <tr className="row-1 odd">
-          <th className="column-1">Moedel</th>
+          <th className="column-1">Model</th>
           <th className="column-2">&nbsp;</th>
         </tr>
       </thead>

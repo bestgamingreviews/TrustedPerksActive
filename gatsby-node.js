@@ -283,10 +283,22 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
       beforebody: String @mdx
       afterbody: String @mdx
       products: [MdxBody]
+      faq: [Faq]
     }
 
     type MdxBody {
       body: String @mdx
+      specs: [Spec]
+    }
+
+    type Faq {
+      ques: String
+      ans: String
+    }
+    
+    type Spec {
+      name: String
+      value: String
     }
   `);
 };

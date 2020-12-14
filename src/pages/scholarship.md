@@ -2,17 +2,17 @@
 templateKey: default-page
 title: toolgears 1000$ Internet Marketing Scholarship
 seoTitle: toolgears 1000$ Internet Marketing Scholarship
-seoDescription: Finding the best and latest product is hard with a plethora of choices and various categories, it can get complicated. ToolGears simplifies it by reviewing it for the consumer’s ease.
+seoDescription: Finding the best and latest product is hard with a plethora of choices and various categories, it can get complicated. Tools & Gears simplifies it by reviewing it for the consumer’s ease.
 schema: ""
 ---
 
-ToolGears is aiming for the best, being the torch bearers in the field of Tech; it is a responsibility that we hold close. We aim to give our share of knowledge in the betterment of society by choosing what is best for the consumers and us.
+Tools & Gears is aiming for the best, being the torch bearers in the field of Tech; it is a responsibility that we hold close. We aim to give our share of knowledge in the betterment of society by choosing what is best for the consumers and us.
 
 In digital marketing, words have the power to make and break a product, and we realize the potential of written words. Along with that, we recognize creative writing skills relevance in offline domains.
 
-Alas, not all the creative geniuses can expand their horizons in the field of content marketing due to inadequate guidance and exposure, which is a sad reality. However, ToolGears comes with a solution; we want to nurture the creative minds and see them blossom in the field of content marketing, in a goal-oriented fashion.
+Alas, not all the creative geniuses can expand their horizons in the field of content marketing due to inadequate guidance and exposure, which is a sad reality. However, Tools & Gears comes with a solution; we want to nurture the creative minds and see them blossom in the field of content marketing, in a goal-oriented fashion.
 
-The minds that have the passion for exploring the field of ‘Content Marketing’ now have a great opportunity with ToolGears Internet Marketing Scholarship for Undergraduate or Postgraduate students. The students who are passionate and show remarkable skills will receive an prize of \$1000.
+The minds that have the passion for exploring the field of ‘Content Marketing’ now have a great opportunity with Tools & Gears Internet Marketing Scholarship for Undergraduate or Postgraduate students. The students who are passionate and show remarkable skills will receive an prize of \$1000.
 
 To receive this prize, you need to be an enthusiast in the field; no kind of expertise is required. Students from multiple backgrounds are highly encouraged to apply!
 
@@ -29,5 +29,5 @@ Please make sure that you include an essay of 2000-3000 words on “How do you s
 
 ## Selection Criteria
 
-The Editorial Board will analyze each essay at ToolGears, who will then select a winner on February 21st, 2020.
+The Editorial Board will analyze each essay at Tools & Gears, who will then select a winner on February 21st, 2020.
 Please note that the Editorial Board has the right to cancel or reject any entries or applications without giving any specific reason.

@@ -587,6 +587,10 @@ div#gatsby-focus-wrapper > div {
 .section {
   flex: 1;
 }
+.default-page .content {
+  background-color: var(--custom-color-2);
+  padding: 30px 20px;
+}
 @media (min-width: 1024px) {
   .column.is-9 {
     width: 73%;
@@ -598,6 +602,9 @@ div#gatsby-focus-wrapper > div {
   }
 }
 @media (max-width: 767px) {
+  .default-page .content {
+    padding: 20px 12px;
+  }
   .section {
     padding-left: 10px;
     padding-right: 10px;

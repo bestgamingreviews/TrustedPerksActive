@@ -12,7 +12,7 @@ const LatestPosts = (props) => {
           }
           frontmatter {
             title
-            cat
+            category
             featuredimage {
               name
               base
@@ -40,13 +40,13 @@ const LatestPosts = (props) => {
   };
 
   return (
-    <div className="cat-section latest-posts">
+    <div className="category-section latest-posts">
       <p className="lp-title">Latest Posts</p>
       <div className="index-columns">
         {posts.map((post) => {
           const id = post.id;
           const slug = post.fields.slug;
-          const { title, cat: category } = post.frontmatter;
+          const { title, category } = post.frontmatter;
           const { name: imgName, base: img } = post.frontmatter.featuredimage;
           const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
 
@@ -60,7 +60,7 @@ const LatestPosts = (props) => {
                   </picture>
                 </Link>
               </div>
-              <div className="index-box-cat">
+              <div className="index-box-category">
                 <Link to={`/${category.toLowerCase().split(" ").join("-")}/`}>{category}</Link>
               </div>
               <div className="index-box-title">

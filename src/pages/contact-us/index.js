@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { navigate } from "gatsby-link";
 import Layout from "../../components/Layout";
 import HeadData from "../../components/HeadData.js";
-import useSiteMetadata from "../../components/SiteMetadata";
+import useSiteMetaData from "../../components/SiteMetadata";
 
 function encode(data) {
   return Object.keys(data)
@@ -12,7 +12,7 @@ function encode(data) {
 
 const ContactUs = () => {
   const [state, setState] = useState({ isValidated: false });
-  const { title: siteName } = useSiteMetadata();
+  const { name: siteName, siteURL } = useSiteMetaData();
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -34,12 +34,40 @@ const ContactUs = () => {
   };
 
   const title = `Contact Us - ${siteName}`;
-  const schema = `{"@context":"https://schema.org","@type":"ContactPage","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.toolgears.com/contact-us/"},"url":"https://www.toolgears.com/contact-us/","headline":"Contact Us","description":"Feel free to contact us anytime or about anything, we are due with your debate. Our support team is always ready to help our audience, and whosoever.","image":{"@type":"ImageObject","@id":"https://www.toolgears.com/contact-us/#primaryimage","url":"https://www.toolgears.com/useful-img/Best-Gaming-PC-Build.jpg","width":"1836","height":"1948"},"publisher":{"@type":"Organization","name":"${siteName}","logo":{"@type":"ImageObject","url":"https://www.toolgears.com/useful-img/logo-large.png","width":"800","height":"258"}}}`;
+  const description = "Feel free to contact us anytime or about anything, we are due with your debate. Our support team is always ready to help our audience, and whosoever.";
+  const schema = `{
+    "@context":"https://schema.org",
+    "@type":"ContactPage",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"${siteURL}/contact-us/"
+    },
+    "url":"${siteURL}/contact-us/",
+    "headline":"${title}",
+    "description":"${description}",
+    "image":{
+      "@type":"ImageObject",
+      "@id":"${siteURL}/contact-us/#primaryimage",
+      "url":"${siteURL}/useful-img/Best-Gaming-PC-Build.jpg",
+      "width":"1836",
+      "height":"1948"
+    },
+    "publisher": {
+      "@type":"Organization",
+      "name":"${siteName}",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"${siteURL}/useful-img/logo-large.png",
+        "width":"800",
+        "height":"258"
+      }
+    }
+  }`;
 
   return (
     <Layout title={title}>
-      <section className="section">
-        <HeadData title={title} description="Feel free to contact us anytime or about anything, we are due with your debate. Our support team is always ready to help our audience, and whosoever." schema={schema} />
+      <section className="section default-page">
+        <HeadData title={title} description={description} schema={schema} />
         <div className="container">
           <div className="content">
             <h1 className="title">{title}</h1>

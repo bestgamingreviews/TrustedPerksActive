@@ -7,7 +7,7 @@ import HeadData from "../components/HeadData.js";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { MDXProvider } from "@mdx-js/react";
 import * as PostComps from "../components/blog/PostComponents.js";
-import Writer from "../components/Writer.js";
+import Author from "../components/Author.js";
 import LatestPosts from "../components/LatestPosts.js";
 import RatingBox from "../components/blog/RatingBox";
 import TopArrow from "../svg-icons/top-arrow.js";
@@ -19,7 +19,8 @@ import SidebarTableofContents from "../components/sidebar/SidebarTableofContents
 import Search from "../components/SearchForm";
 
 export const BlogPostTemplate = (props) => {
-  const { content, title, helmet, date, image, sidebar, faq, writer, rating, rcount, rvalue, tableofcontent, link, tocdata, beforeBody, afterBody, products, productstabletitle, productstable } = props;
+  const { name: siteName } = useSiteMetaData();
+  const { content, title, helmet, date, image, sidebar, faq, author, rating, rcount, rvalue, tableofcontent, link, tocdata, beforeBody, afterBody, products, productstabletitle, productstable } = props;
   const [btT, setBtT] = useState("");
   const contentRef = useRef(null);
   const [topOffset, setTopOffset] = useState(900000000);
@@ -135,7 +136,7 @@ export const BlogPostTemplate = (props) => {
               </div>
             )}
             {rating && <RatingBox count={rcount} value={rvalue} />}
-            <Writer writer={writer} />
+            <Author authorName={author} />
             <div id="disqus_thread">
               <LazyLoad offsetTop={topOffset}>
                 <Disqus config={disqusConfig} />
@@ -145,7 +146,7 @@ export const BlogPostTemplate = (props) => {
           <div className="column is-3">
             <div className="sidebar">
               <div className="site-info">
-                <p>toolgears is reader-supported. When you buy through links on our site, we may earn an affiliate commission.</p>
+                <p>{siteName} is reader-supported. When you buy through links on our site, we may earn an affiliate commission.</p>
               </div>
               <Search />
               <SidebarLatestPosts />
@@ -167,16 +168,16 @@ BlogPostTemplate.propTypes = {
   image: PropTypes.object,
   sidebar: PropTypes.object,
   faq: PropTypes.array,
-  writer: PropTypes.string,
+  author: PropTypes.string,
   enabletoc: PropTypes.bool,
-  cat: PropTypes.string,
+  category: PropTypes.string,
 };
 
 const BlogPost = (props) => {
+  const { siteURL, name: siteName } = useSiteMetaData();
   const { mdx: post } = props.data;
-  const { title, date, sdate, moddate, writer, rcount, faq, products, seoTitle, seoDescription, cat, featuredimage, sidebar, rating, tableofcontent, rvalue, beforebody, afterbody, productstable, productstabletitle } = post.frontmatter;
+  const { frontmatter } = post;
   const { base: img } = post.frontmatter.featuredimage;
-  const { siteURL, title: siteName } = useSiteMetaData();
   const path = `${siteURL}/${post.frontmatter.slug}/`;
 
   const articleSchema = `{
@@ -186,15 +187,15 @@ const BlogPost = (props) => {
       "@type": "WebPage",
       "@id": "${path}"
     },
-    "headline": "${title}",
+    "headline": "${frontmatter.title}",
     "image": [
       "${siteURL}/img/${img}"
      ],
-    "datePublished": "${sdate}",
-    "dateModified": "${moddate}",
+    "datePublished": "${frontmatter.sdate}",
+    "dateModified": "${frontmatter.moddate}",
     "author": {
       "@type": "Person",
-      "name": "${writer}"
+      "name": "${frontmatter.author}"
     },
      "publisher": {
       "@type": "Organization",
@@ -209,11 +210,11 @@ const BlogPost = (props) => {
   const ratingSchema = `{
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": "${title}",
+    "name": "${frontmatter.title}",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5",
-      "ratingCount": "${rcount}",
+      "ratingCount": "${frontmatter.rcount}",
       "bestRating": "5",
       "worstRating": "1"
     }
@@ -224,8 +225,8 @@ const BlogPost = (props) => {
     "@type": "FAQPage",
     "mainEntity": [
       ${
-        faq &&
-        faq.map(
+        frontmatter.faq &&
+        frontmatter.faq.map(
           (item) => `{
           "@type": "Question",
           "name": "${item.ques}",
@@ -243,11 +244,11 @@ const BlogPost = (props) => {
     "@context": "http://schema.org",
     "@type": "ItemList",
     "url": "${path}",
-    "name": "${title}",
+    "name": "${frontmatter.title}",
     "itemListElement": [
       ${
-        products &&
-        products.map(
+        frontmatter.products &&
+        frontmatter.products.map(
           (item, index) => `{
         "@type":"ListItem",
         "position":${index + 1},
@@ -267,35 +268,34 @@ const BlogPost = (props) => {
   }`;
 
   return (
-    <Layout type="post" title={title} titleParent={cat} link={`/${cat.toLowerCase().split(" ").join("-")}/`}>
+    <Layout type="post" title={frontmatter.title} titleParent={frontmatter.category} link={`/${frontmatter.category.toLowerCase().split(" ").join("-")}/`}>
       <BlogPostTemplate
         content={post.body}
         helmet={
-          <HeadData title={seoTitle} description={seoDescription} image={img}>
+          <HeadData title={`${frontmatter.seoTitle} - ${siteName}`} description={frontmatter.seoDescription} image={img}>
             <script type="application/ld+json">{articleSchema}</script>
-            {rating && <script type="application/ld+json">{ratingSchema}</script>}
-            {products && <script type="application/ld+json">{productSchema}</script>}
-            {faq && <script type="application/ld+json">{faqSchema}</script>}
+            {frontmatter.rating && <script type="application/ld+json">{ratingSchema}</script>}
+            {frontmatter.products && <script type="application/ld+json">{productSchema}</script>}
+            {frontmatter.faq && <script type="application/ld+json">{faqSchema}</script>}
           </HeadData>
         }
-        cat={cat}
-        title={title}
-        date={date}
-        image={featuredimage}
-        sidebar={sidebar}
-        faq={faq}
-        writer={writer}
-        rvalue={rvalue ? rvalue : 5}
-        rcount={rcount || 0}
-        rating={rating}
-        tableofcontent={tableofcontent}
+        title={frontmatter.title}
+        date={frontmatter.date}
+        image={frontmatter.featuredimage}
+        sidebar={frontmatter.sidebar}
+        faq={frontmatter.faq}
+        author={frontmatter.author}
+        rvalue={frontmatter.rvalue ? frontmatter.rvalue : 5}
+        rcount={frontmatter.rcount || 0}
+        rating={frontmatter.rating}
+        tableofcontent={frontmatter.tableofcontent}
         link={path}
         tocdata={props.pageContext.toc}
-        beforeBody={beforebody}
-        afterBody={afterbody}
-        products={products}
-        productstabletitle={productstabletitle}
-        productstable={productstable}
+        beforeBody={frontmatter.beforebody}
+        afterBody={frontmatter.afterbody}
+        products={frontmatter.products}
+        productstabletitle={frontmatter.productstabletitle}
+        productstable={frontmatter.productstable}
       />
     </Layout>
   );
@@ -333,7 +333,7 @@ export const pageQuery = graphql`
         sdate: date(formatString: "YYYY-MM-DDTHHmmss")
         moddate(formatString: "YYYY-MM-DDTHHmmss")
         tableofcontent
-        writer
+        author
         rating
         rcount
         rvalue
@@ -362,7 +362,7 @@ export const pageQuery = graphql`
           }
         }
         afterbody
-        cat
+        category
         sidebar {
           stitle
           atext

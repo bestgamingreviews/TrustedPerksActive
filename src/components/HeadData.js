@@ -1,18 +1,38 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import useSiteMetadata from "./SiteMetadata";
-import { withPrefix } from "gatsby";
+import useSiteMetaData from "./SiteMetadata";
+import { graphql, useStaticQuery, withPrefix } from "gatsby";
 
 const HeadData = (props) => {
-  const { siteURL, title: siteName } = useSiteMetadata();
+  const { siteURL, name: siteName } = useSiteMetaData();
   const { title, description, image, schema } = props;
+  const {
+    allMarkdownRemark: { nodes: categories },
+  } = useStaticQuery(graphql`
+    query FindCategories {
+      allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "category-page" } } }) {
+        nodes {
+          frontmatter {
+            title
+            slug
+          }
+        }
+      }
+    }
+  `);
   const sitemapschema = `{
     "@context":"https://schema.org",
     "@graph":[
-      {"@context":"https://schema.org","@type":"SiteNavigationElement","@id":"#Primary","name":"Learning Guides","url":"${siteURL}/learning-guides/"},
-      {"@context":"https://schema.org","@type":"SiteNavigationElement","@id":"#Primary","name":"Buying Guides","url":"${siteURL}/buying-guides/"},
-      {"@context":"https://schema.org","@type":"SiteNavigationElement","@id":"#Primary","name":"News","url":"${siteURL}/news/"},
-      {"@context":"https://schema.org","@type":"SiteNavigationElement","@id":"#Primary","name":"Reviews","url":"${siteURL}/reviews/"}]}`;
+      ${categories.map(
+        ({ frontmatter }) => `{
+        "@context":"https://schema.org",
+        "@type":"SiteNavigationElement",
+        "@id":"#Primary",
+        "name":"${frontmatter.title}",
+        "url":"${siteURL}/${frontmatter.slug}/"
+      }`
+      )}
+    ]}`;
   const index = props.index !== false;
 
   return (

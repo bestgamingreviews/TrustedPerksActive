@@ -1,20 +1,20 @@
 ---
 templateKey: default-page
 title: About Us
-seoTitle: About Us - ToolGears
-seoDescription: I was searching for reviews about tech products I found that most of the websites weren't providing useful thats when I got the idea of ToolGears.
-schema: "{\"@context\":\"https:\/\/schema.org\",\"@type\":\"AboutPage\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\/\/www.toolgears.com\/about-us\/\"},\"url\":\"https:\/\/www.toolgears.com\/about-us\/\",\"headline\":\"About Us\",\"description\":\"I was searching for reviews about tech products I found that most of the websites weren't providing useful thats when I got the idea of ToolGears.\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https:\/\/www.toolgears.com\/about-us\/#primaryimage\",\"url\":\"https:\/\/www.toolgears.com\/img\/Best-Gaming-PC-Build.jpg\",\"width\":\"1836\",\"height\":\"1948\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"ToolGears\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\/\/www.toolgears.com\/img\/logo-large.jpg\",\"width\":\"800\",\"height\":\"258\"}}},"
+seoTitle: About Us
+seoDescription: I was searching for reviews about tech products I found that most of the websites weren't providing useful thats when I got the idea of Tools & Gears.
+schema: "{\"@context\":\"https:\/\/schema.org\",\"@type\":\"AboutPage\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\/\/www.toolgears.com\/about-us\/\"},\"url\":\"https:\/\/www.toolgears.com\/about-us\/\",\"headline\":\"About Us\",\"description\":\"I was searching for reviews about tech products I found that most of the websites weren't providing useful thats when I got the idea of Tools & Gears.\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https:\/\/www.toolgears.com\/about-us\/#primaryimage\",\"url\":\"https:\/\/www.toolgears.com\/img\/Best-Gaming-PC-Build.jpg\",\"width\":\"1836\",\"height\":\"1948\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Tools & Gears\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\/\/www.toolgears.com\/img\/logo-large.jpg\",\"width\":\"800\",\"height\":\"258\"}}},"
 ---
 
 ## How it all Happened
 
-While I was searching for reviews about tech products I found that most of the websites weren’t providing useful that’s when I got the idea of ToolGears. I believed that I could write better reviews in a more professional way.
+While I was searching for reviews about tech products I found that most of the websites weren’t providing useful that’s when I got the idea of Tools & Gears. I believed that I could write better reviews in a more professional way.
 
 If you wish to know which product fits your needs best, this blog will be of big help to you.
 
 There are a lot of people who consider whatever product their friends, spouse, family members, or teachers suggest to them with. Not a lot of people have leisure time on their hands to do a little research themselves and check out several reviews. Believe me, it takes a lot of time to search for a product online.
 
-## Toolgears.com
+## toolgears.com
 
 The major purpose of **toolgears**.com is to deliver honest and reviews about all the technologic products in the world by ranking them from 1-10 – the top ten list.
 

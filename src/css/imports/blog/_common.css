@@ -36,7 +36,7 @@
 .has-text-align-center {
   text-align: center;
 }
-.blog-post .cat-section {
+.blog-post .category-section {
   margin-top: 15px;
   margin-bottom: 0;
 }
@@ -62,7 +62,7 @@ div#disqus_thread {
   padding: 0 20px 25px;
 }
 @media (max-width: 767px) {
-  .blog-post .cat-section {
+  .blog-post .category-section {
     margin-bottom: 15px;
   }
 }

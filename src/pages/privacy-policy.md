@@ -1,7 +1,7 @@
 ---
 templateKey: default-page
 title: Privacy Policy
-seoTitle: Privacy Policy - ToolGears
+seoTitle: Privacy Policy
 seoDescription: Our Privacy Policy describes everything that we collect in order to keep this website running. If you have an account on this site, or have left comments...
 schema: ""
 ---

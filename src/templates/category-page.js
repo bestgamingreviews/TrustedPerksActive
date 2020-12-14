@@ -7,11 +7,11 @@ import useSiteMetaData from "../components/SiteMetadata.js";
 
 const CategoryPage = (props) => {
   const { nodes: posts } = props.data.allMdx;
-  const { siteURL, title: siteName } = useSiteMetaData();
+  const { siteURL, name: siteName } = useSiteMetaData();
   const cPage = props.data.markdownRemark.frontmatter;
   const firstPost = posts[0];
   const fSlug = firstPost && firstPost.fields.slug;
-  const { title, sdate, moddate, writer } = (firstPost && firstPost.frontmatter) || {};
+  const { title, sdate, moddate, author } = (firstPost && firstPost.frontmatter) || {};
   const { base: img } = (firstPost && firstPost.frontmatter.featuredimage) || {};
 
   const articleSchema =
@@ -31,7 +31,7 @@ const CategoryPage = (props) => {
     "dateModified": "${moddate}",
     "author": {
       "@type": "Person",
-      "name": "${writer}"
+      "name": "${author}"
     },
      "publisher": {
       "@type": "Organization",
@@ -60,7 +60,7 @@ const CategoryPage = (props) => {
   return (
     <Layout>
       <section className="section category-post">
-        <HeadData title={cPage.seoTitle} description={cPage.seoDescription} schema={articleSchema} />
+        <HeadData title={`${cPage.seoTitle} - ${siteName}`} description={cPage.seoDescription} schema={articleSchema} />
         <div className="container content">
           <div className="category-top-section">
             <h1>{cPage.title}</h1>
@@ -69,7 +69,7 @@ const CategoryPage = (props) => {
           <div className="category-bottom-section">
             <div className="category-columns">
               {posts.map((post) => {
-                const { title, writer, date } = post.frontmatter;
+                const { title, author, date } = post.frontmatter;
                 const { base: img, name: imgName } = post.frontmatter.featuredimage;
                 const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
                 const slug = post.fields.slug;
@@ -91,7 +91,7 @@ const CategoryPage = (props) => {
                         <Link to={`${slug}/`}>{title}</Link>
                       </div>
                       <div className="category_box_info">
-                        <Link to={`/author/${writer.toLowerCase().split(" ").join("-")}/`}>{writer}</Link> | {date}
+                        <Link to={`/author/${author.toLowerCase().split(" ").join("-")}/`}>{author}</Link> | {date}
                       </div>
                     </div>
                   </div>
@@ -133,8 +133,8 @@ CategoryPage.propTypes = {
 export default CategoryPage;
 
 export const pageQuery = graphql`
-  query CategoryPageByTag($cat: String!, $id: String!, $skip: Int!, $limit: Int!) {
-    allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { cat: { eq: $cat } } }, limit: $limit, skip: $skip) {
+  query CategoryPageByTag($category: String!, $id: String!, $skip: Int!, $limit: Int!) {
+    allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { category: { eq: $category } } }, limit: $limit, skip: $skip) {
       nodes {
         excerpt(pruneLength: 400)
         id
@@ -143,7 +143,7 @@ export const pageQuery = graphql`
         }
         frontmatter {
           title
-          writer
+          author
           templateKey
           date(formatString: "MMMM DD, YYYY")
           sdate: date(formatString: "YYYY-MM-DDTHHmmss")

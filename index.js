@@ -10,7 +10,10 @@ import Categories from "../components/fragments/IndexCategories.js";
 const IndexTemplate = ({ data }) => {
   const singlePost = data.FP.nodes[0];
   const otherPosts = data.OP.nodes;
-  const sections = [data.BG.nodes, data.LG.nodes, data.N.nodes, data.R.nodes];
+  const sections = data.categories.group.map(({ category }) => {
+    const posts = data.posts.nodes.filter((post) => post.frontmatter.category === category).slice(0, 5);
+    return { title: category, posts };
+  });
   const {
     siteURL,
     title,
@@ -185,45 +188,40 @@ const OtherPosts = ({ posts }) => (
 );
 
 const Sections = ({ data }) => {
-  const catTitles = ["Buying Guides", "Learning Guides", "News", "Reviews"];
-
   return (
     <div className="category-sections">
-      {data.map(
-        (category, index) =>
-          !!category.length && (
-            <div className="category-section" key={index}>
-              <div className="index-latest-title">
-                <h2>{catTitles[index]}</h2>
-              </div>
-              <div className="index-columns">
-                {category.map((post, index) => {
-                  const { title } = post.frontmatter;
-                  const { name: imgName, base: img } = post.frontmatter.featuredimage;
-                  const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
-                  const slug = post.fields.slug;
+      {data.map((category, index) => (
+        <div className="category-section" key={index}>
+          <div className="index-latest-title">
+            <h2>{category.title}</h2>
+          </div>
+          <div className="index-columns">
+            {category.posts.map((post, index) => {
+              const { title } = post.frontmatter;
+              const { name: imgName, base: img } = post.frontmatter.featuredimage;
+              const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
+              const slug = post.fields.slug;
 
-                  return (
-                    <div className="index-column" key={index}>
-                      <div className="index-col-image">
-                        <Link to={`${slug}/`}>
-                          <picture>
-                            <source srcSet={`/image/latest/${imgName}.webp`} />
-                            <img src={`/img/${img}`} alt={title} loading="lazy" width={width} height={height} />
-                          </picture>
-                        </Link>
-                      </div>
-                      <div className="index-box-title">
-                        <Link to={`${slug}/`}>{title}</Link>
-                      </div>
-                    </div>
-                  );
-                })}
-                {FillSpace(category.length)}
-              </div>
-            </div>
-          )
-      )}
+              return (
+                <div className="index-column" key={index}>
+                  <div className="index-col-image">
+                    <Link to={`${slug}/`}>
+                      <picture>
+                        <source srcSet={`/image/latest/${imgName}.webp`} />
+                        <img src={`/img/${img}`} alt={title} loading="lazy" width={width} height={height} />
+                      </picture>
+                    </Link>
+                  </div>
+                  <div className="index-box-title">
+                    <Link to={`${slug}/`}>{title}</Link>
+                  </div>
+                </div>
+              );
+            })}
+            {FillSpace(category.length)}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
@@ -274,73 +272,19 @@ export const IndexQuery = graphql`
         }
       }
     }
-    BG: allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { category: { eq: "Buying Guides" } } }, limit: 6) {
-      nodes {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          featuredimage {
-            name
-            base
-            childImageSharp {
-              original {
-                height
-                width
-              }
-            }
-          }
-        }
+    categories: allMdx {
+      group(field: frontmatter___category) {
+        category: fieldValue
       }
     }
-    LG: allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { category: { eq: "Learning Guides" } } }, limit: 6) {
+    posts: allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
       nodes {
         fields {
           slug
         }
         frontmatter {
           title
-          featuredimage {
-            name
-            base
-            childImageSharp {
-              original {
-                height
-                width
-              }
-            }
-          }
-        }
-      }
-    }
-    N: allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { category: { eq: "News" } } }, limit: 6) {
-      nodes {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          featuredimage {
-            name
-            base
-            childImageSharp {
-              original {
-                height
-                width
-              }
-            }
-          }
-        }
-      }
-    }
-    R: allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { category: { eq: "Reviews" } } }, limit: 6) {
-      nodes {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
+          category
           featuredimage {
             name
             base

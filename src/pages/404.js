@@ -5,12 +5,12 @@ import LatestPosts from "../components/LatestPosts.js";
 import useSiteMetaData from "../components/SiteMetadata.js";
 
 const NotFoundPage = () => {
-  const { title } = useSiteMetaData();
+  const { name } = useSiteMetaData();
 
   return (
     <Layout>
       <section className="section notfound-page">
-        <HeadData title={`404 Page - ${title}`} description="Page not Found" />
+        <HeadData title={`404 Page - ${name}`} description="Page not Found" />
         <div className="container content">
           <div className="notfound_top_section">
             <h1 className="notfound_title">NOT FOUND</h1>

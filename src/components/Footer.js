@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "gatsby";
 import SocialIcons from "./SocialIcons.js";
-import useSiteMetadata from "./SiteMetadata";
+import useSiteMetaData from "./SiteMetadata";
 
 const Footer = () => {
   const [footerBarActiveClass, setFooterBarActiveClass] = useState("");
   const [footerActive, setFooterActive] = useState(false);
-  const { title } = useSiteMetadata();
+  const { name } = useSiteMetaData();
 
   const toggleFooterHamburger = () => {
     !footerActive ? setFooterBarActiveClass("is-active") : setFooterBarActiveClass("");
@@ -19,7 +19,7 @@ const Footer = () => {
         <div className="footer-logo has-text-centered">
           <div className="logo-container">
             <Link to="/">
-              <img src="/useful-img/logo-large.png" alt={title} loading="lazy" width="280" height="90" />
+              <img src="/useful-img/logo-large.png" alt={name} loading="lazy" width="280" height="90" />
             </Link>
           </div>
         </div>
@@ -60,7 +60,7 @@ const Footer = () => {
                 <img src="/useful-img/dmca.png" alt="DMCA.com Protection Status" loading="lazy" width="121" height="24" />
               </a>
             </div>
-            <p>ToolGears © 2020. All rights reserved.</p>
+            <p>{name} © 2020. All rights reserved.</p>
           </div>
         </div>
       </div>

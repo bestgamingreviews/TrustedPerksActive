@@ -4,16 +4,17 @@ import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 import HeadData from "../components/HeadData.js";
+import useSiteMetaData from "../components/SiteMetadata.js";
 
 export const DefaultPageTemplate = ({ title, content, contentComponent }) => {
   const PageContent = contentComponent || Content;
 
   return (
-    <section className="section">
+    <section className="section default-page">
       <div className="container">
         <div className="content">
           <h1 className="title">{title}</h1>
-          <PageContent className="content" content={content} />
+          <PageContent content={content} />
         </div>
       </div>
     </section>
@@ -27,11 +28,12 @@ DefaultPageTemplate.propTypes = {
 };
 
 const DefaultPage = ({ data }) => {
+  const { name: siteName } = useSiteMetaData();
   const { markdownRemark: post } = data;
 
   return (
     <Layout title={post.frontmatter.title}>
-      <HeadData title={post.frontmatter.seoTitle} description={post.frontmatter.seoDescription} schema={post.frontmatter.schema} />
+      <HeadData title={`${post.frontmatter.seoTitle} - ${siteName}`} description={post.frontmatter.seoDescription} schema={post.frontmatter.schema} />
       <DefaultPageTemplate contentComponent={HTMLContent} title={post.frontmatter.title} content={post.html} />
     </Layout>
   );

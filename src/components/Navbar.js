@@ -8,7 +8,7 @@ import AnimateHeight from "react-animate-height";
 const Navbar = () => {
   const [navBarActiveClass, setNavBarActiveClass] = useState("");
   const [navBarChildActiveClass, setNavBarChildActiveClass] = useState("");
-  const { title } = useSiteMetaData();
+  const { name } = useSiteMetaData();
 
   const toggleHamburger = () => {
     navBarActiveClass ? setNavBarActiveClass("") : setNavBarActiveClass("is-active");
@@ -34,8 +34,8 @@ const Navbar = () => {
     <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
       <div className="container">
         <div className="navbar-brand">
-          <Link to="/" className="logo-container" title={title}>
-            <img src="/useful-img/logo.png" alt={title} loading="lazy" width="187" height="60" />
+          <Link to="/" className="logo-container" title={name}>
+            <img src="/useful-img/logo.png" alt={name} loading="lazy" width="187" height="60" />
           </Link>
           {/* Hamburger menu */}
           <div className={`navbar-burger burger ${navBarActiveClass}`} data-target="navMenu" onClick={() => toggleHamburger()}>

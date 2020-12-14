@@ -4,12 +4,12 @@ import HeadData from "../../components/HeadData.js";
 import useSiteMetaData from "../../components/SiteMetadata.js";
 
 export default () => {
-  const { title } = useSiteMetaData();
+  const { name } = useSiteMetaData();
 
   return (
     <Layout title="Thanks" link="/contact-us/" titleParent="Contact Us">
-      <section className="section">
-        <HeadData title={`Thanks - ${title}`} description="Thanks for contacting us." index={false} />
+      <section className="section default-page">
+        <HeadData title={`Thanks - ${name}`} description="Thanks for contacting us." index={false} />
         <div className="container">
           <div className="content">
             <h1>Thank you!</h1>

@@ -193,10 +193,10 @@ export const ProductsTable = ({ products }) => {
                   <TImage alt={item.name} src={item.image.base} />
                 </div>
                 <a
-                  href={item.name
+                  href={`#${item.name
                     .replace(/[^\w ]/, "")
                     .split(" ")
-                    .join("_")}
+                    .join("_")}`}
                 >
                   {item.name}
                 </a>

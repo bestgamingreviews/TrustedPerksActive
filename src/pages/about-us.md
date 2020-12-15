@@ -24,5 +24,3 @@ I had only one thought at that time, To start my own Web Page to list Best Tools
 The main purpose of **ToolGear**.com is to lookout for products and review them deeply without any biasedness and to rank them from 1 to 10 keeping in mind different factors.
 
 Do share us with your Family and Friends.
-
-Thank You :)

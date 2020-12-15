@@ -2,22 +2,27 @@
 templateKey: default-page
 title: About Us
 seoTitle: About Us
-seoDescription: I was searching for reviews about tech products I found that most of the websites weren't providing useful thats when I got the idea of Tools & Gears.
-schema: "{\"@context\":\"https:\/\/schema.org\",\"@type\":\"AboutPage\",\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https:\/\/www.toolgears.com\/about-us\/\"},\"url\":\"https:\/\/www.toolgears.com\/about-us\/\",\"headline\":\"About Us\",\"description\":\"I was searching for reviews about tech products I found that most of the websites weren't providing useful thats when I got the idea of Tools & Gears.\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https:\/\/www.toolgears.com\/about-us\/#primaryimage\",\"url\":\"https:\/\/www.toolgears.com\/img\/Best-Gaming-PC-Build.jpg\",\"width\":\"1836\",\"height\":\"1948\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Tools & Gears\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https:\/\/www.toolgears.com\/img\/logo-large.jpg\",\"width\":\"800\",\"height\":\"258\"}}},"
+seoDescription: I started Tool Gears to provide the real and unbisaed review of
+  products. We rank products from 1 to 10 based on different factors.
+schema: "{\"@context\":\"https://schema.org\",\"@type\":\"AboutPage\",\"mainEnt\
+  ityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https://www.toolgears.com/about-\
+  us/\"},\"url\":\"https://www.toolgears.com/about-us/\",\"headline\":\"About
+  Us\",\"description\":\"I was searching for reviews about tech products I found
+  that most of the websites weren't providing useful thats when I got the idea
+  of Tools &
+  Gears.\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https://www.toolgears\
+  .com/about-us/#primaryimage\",\"url\":\"https://www.toolgears.com/img/Best-Ga\
+  ming-PC-Build.jpg\",\"width\":\"1836\",\"height\":\"1948\"},\"publisher\":{\"\
+  @type\":\"Organization\",\"name\":\"Tools &
+  Gears\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://www.toolgears.c\
+  om/img/logo-large.jpg\",\"width\":\"800\",\"height\":\"258\"}}},"
 ---
+It was about 2014 when i was searching for some chainsaws and screw drivers on Google. Turned out, I bought a useless one which had no worth. I got scammed because of that website. At that time 90% websites were posting a sponsored review about useless products. 
 
-## How it all Happened
+I had only one thought at that time, To start my own Web Page to list Best Tools and Gears and publish Unbiased Reviews.
 
-While I was searching for reviews about tech products I found that most of the websites weren’t providing useful that’s when I got the idea of Tools & Gears. I believed that I could write better reviews in a more professional way.
+The main purpose of **ToolGear**.com is to lookout for products and review them deeply without any biasedness and to rank them from 1 to 10 keeping in mind different factors.
 
-If you wish to know which product fits your needs best, this blog will be of big help to you.
+Do share us with your Family and Friends.
 
-There are a lot of people who consider whatever product their friends, spouse, family members, or teachers suggest to them with. Not a lot of people have leisure time on their hands to do a little research themselves and check out several reviews. Believe me, it takes a lot of time to search for a product online.
-
-## toolgears.com
-
-The major purpose of **toolgears**.com is to deliver honest and reviews about all the technologic products in the world by ranking them from 1-10 – the top ten list.
-
-My idea of this blog is for it to be the only place where people come to when they are having second thoughts about finding good products that meet their needs. Regardless of the name of the product, if it’s a tech product, we got you covered.
-
-Make sure to read carefully and always drop a comment.
+Thank You :)

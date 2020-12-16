@@ -1,8 +1,12 @@
 ---
 templateKey: category-page
-title: "News"
+title: News
 slug: news
-description: "Looking for the latest and amazing game news? Are you waiting for new game launch? Want to read about all the latest and hottest game anticipations? We are here to provide you the information that you need to know and want to know about the world of games."
-seoTitle: "News Archives"
-seoDescription: "Looking for the latest and amazing game news? Are you waiting for new game launch? Want to read about all the latest and hottest game anticipations?"
+description: Stay up to date with our News section. We will be posting about
+  Product's release and new features. Subscribe to our News page if you want to
+  stay ahead in the game. We will be providing all the latest news about Tools
+  and Machines.
+seoTitle: News Archives
+seoDescription: Wanna stay up to date in the game? Subscribe to our News Archive
+  so that you may know everything in advance.
 ---

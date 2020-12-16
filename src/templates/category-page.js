@@ -47,8 +47,8 @@ const CategoryPage = (props) => {
   const { currentPage, numPages, slug } = props.pageContext;
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
-  const prevPage = currentPage - 1 === 1 ? `${slug}/` : `${slug}/page/${currentPage - 1}/`;
-  const nextPage = `${slug}/page/${currentPage + 1}/`;
+  const prevPage = currentPage - 1 === 1 ? `${slug}/` : `${slug}/${currentPage - 1}/`;
+  const nextPage = `${slug}/${currentPage + 1}/`;
 
   const FillSpace = (catLength) => {
     const space = [];

@@ -49,6 +49,7 @@ const AuthorPosts = (props) => {
   const isLast = currentPage === numPages;
   const prevPage = currentPage - 1 === 1 ? `${props.pageContext.slug}/` : `${props.pageContext.slug}/${currentPage - 1}/`;
   const nextPage = `${props.pageContext.slug}/${currentPage + 1}/`;
+  const categories = props.data.allMarkdownRemark.categories;
 
   return (
     <div className="latest-posts">
@@ -62,6 +63,7 @@ const AuthorPosts = (props) => {
               const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
               const slug = post.fields.slug;
               const id = post.id;
+              const categoryLink = categories.filter((_category) => _category.frontmatter.title === category)[0].fields.slug;
 
               return (
                 <div className="category-column" key={id}>
@@ -80,7 +82,7 @@ const AuthorPosts = (props) => {
                       <Link to={`${slug}/`}>{title}</Link>
                     </div>
                     <div className="category_box_info">
-                      <Link to={`/${category.toLowerCase().split(" ").join("-")}/`}>{category}</Link> | {date}
+                      <Link to={`${categoryLink}/`}>{category}</Link> | {date}
                     </div>
                   </div>
                 </div>
@@ -112,23 +114,6 @@ export default AuthorPage;
 
 export const authorPageQuery = graphql`
   query AuthorPageByID($id: String!, $category: String!, $skip: Int!, $limit: Int!) {
-    markdownRemark(id: { eq: $id }) {
-      frontmatter {
-        title
-        seoTitle
-        seoDescription
-        description
-        image {
-          base
-          childImageSharp {
-            original {
-              height
-              width
-            }
-          }
-        }
-      }
-    }
     allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { author: { eq: $category } } }, limit: $limit, skip: $skip) {
       edges {
         node {
@@ -149,6 +134,34 @@ export const authorPageQuery = graphql`
                   width
                 }
               }
+            }
+          }
+        }
+      }
+    }
+    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "category-page" } } }) {
+      categories: nodes {
+        id
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+        }
+      }
+    }
+    markdownRemark(id: { eq: $id }) {
+      frontmatter {
+        title
+        seoTitle
+        seoDescription
+        description
+        image {
+          base
+          childImageSharp {
+            original {
+              height
+              width
             }
           }
         }

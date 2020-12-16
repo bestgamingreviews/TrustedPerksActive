@@ -179,6 +179,8 @@ const BlogPost = (props) => {
   const { frontmatter } = post;
   const { base: img } = post.frontmatter.featuredimage;
   const path = `${siteURL}/${post.frontmatter.slug}/`;
+  const categories = props.data.allMarkdownRemark.categories;
+  const categoryLink = categories.filter((_category) => _category.frontmatter.title === frontmatter.category)[0].fields.slug;
 
   const articleSchema = `{
     "@context": "https://schema.org",
@@ -268,7 +270,7 @@ const BlogPost = (props) => {
   }`;
 
   return (
-    <Layout type="post" title={frontmatter.title} titleParent={frontmatter.category} link={`/${frontmatter.category.toLowerCase().split(" ").join("-")}/`}>
+    <Layout type="post" title={frontmatter.title} titleParent={frontmatter.category} link={`${categoryLink}/`}>
       <BlogPostTemplate
         content={post.body}
         helmet={
@@ -385,6 +387,17 @@ export const pageQuery = graphql`
         faq {
           ans
           ques
+        }
+      }
+    }
+    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "category-page" } } }) {
+      categories: nodes {
+        id
+        fields {
+          slug
+        }
+        frontmatter {
+          title
         }
       }
     }

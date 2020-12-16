@@ -1,16 +1,12 @@
 ---
 templateKey: author-page
-title: Sample Person
-slug: sample-person
+title: Erik Bolinder
+slug: Erik-Bolinder
+image: /img/author-erik-bolinder.webp
+description: Hi, I'm Erik. I am a Tool enthusiast. I love to do gardening. I
+  used my first ever chainsaw when i was 8 years old. I loved my first tool so
+  much that i dedicated my life to Tools and Gears.
 seoTitle: Sample Person
-seoDescription: Writer Description
-image: /img/sample-person.png
-description: Lorem Ipsum is simply dummy text of the printing and typesetting
-  industry. Lorem Ipsum has been the industry's standard dummy text ever since
-  the 1500s, when an unknown printer took a galley of type and scrambled it to
-  make a type specimen book. It has survived not only five centuries, but also
-  the leap into electronic typesetting, remaining essentially unchanged. It was
-  popularised in the 1960s with the release of Letraset sheets containing Lorem
-  Ipsum passages, and more recently with desktop publishing software like Aldus
-  PageMaker including versions of Lorem Ipsum.
+seoDescription: Erik is Author of Tool Gears and a Tool enthusiast who loves to
+  do gardening and is very passionate about Power Tools.
 ---

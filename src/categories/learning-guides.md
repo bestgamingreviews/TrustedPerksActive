@@ -1,8 +1,12 @@
 ---
 templateKey: category-page
-title: "Learning Guides"
-slug: learning-guides
-description: "Really want to learn more and more about gaming subject. Our learning guide section has covered all the possible topics that are necessary to have good knowledge of them. You will surely find all those topics here on this page that is a bit tricky for you to understand."
-seoTitle: "Technical Knowledge Guides 2020"
-seoDescription: "Want to learn more and more about gaming subject? Our learning guide section has covered all the topics that are necessary to have good knowledge of them."
+title: Knowledge Base
+slug: Knowledge-Base
+description: If You're serious about Tools, This is the right place for you. On
+  ToolGears we made sure we covered all the topics regarding power tools on How
+  to use them and Operate them. If You are anywhere stuck between products make
+  sure to check out our Knowledge Base.
+seoTitle: Knowledge Base
+seoDescription: Dont know how to use and operate different products. Checkout
+  ToolGears Knowledge Base for further information.
 ---

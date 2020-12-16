@@ -7,6 +7,7 @@ import useSiteMetaData from "../components/SiteMetadata.js";
 
 const CategoryPage = (props) => {
   const { nodes: posts } = props.data.allMdx;
+  const authors = props.data.allMarkdownRemark.authors;
   const { siteURL, name: siteName } = useSiteMetaData();
   const cPage = props.data.markdownRemark.frontmatter;
   const firstPost = posts[0];
@@ -73,6 +74,7 @@ const CategoryPage = (props) => {
                 const { base: img, name: imgName } = post.frontmatter.featuredimage;
                 const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
                 const slug = post.fields.slug;
+                const authorLink = authors.filter((_author) => _author.frontmatter.title === author)[0].fields.slug;
 
                 return (
                   <div className="category-column" key={post.id}>
@@ -91,7 +93,7 @@ const CategoryPage = (props) => {
                         <Link to={`${slug}/`}>{title}</Link>
                       </div>
                       <div className="category_box_info">
-                        <Link to={`/author/${author.toLowerCase().split(" ").join("-")}/`}>{author}</Link> | {date}
+                        <Link to={`/author${authorLink}/`}>{author}</Link> | {date}
                       </div>
                     </div>
                   </div>
@@ -158,6 +160,17 @@ export const pageQuery = graphql`
               }
             }
           }
+        }
+      }
+    }
+    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "author-page" } } }) {
+      authors: nodes {
+        id
+        fields {
+          slug
+        }
+        frontmatter {
+          title
         }
       }
     }

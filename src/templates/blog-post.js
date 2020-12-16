@@ -109,7 +109,7 @@ export const BlogPostTemplate = (props) => {
               {products?.map((item, index) => (
                 <div className="product-box" key={index}>
                   <PostComps.PTitle hlevel="3" title={item.name} />
-                  <PostComps.PImage alt={item.name} src={item.image?.base} />
+                  <PostComps.PImage link={item.link} alt={item.name} src={item.image?.base} />
                   <PostComps.SpecTable spec={item.specs} />
                   <MDXProvider components={PostComps}>
                     <MDXRenderer>{item.body}</MDXRenderer>

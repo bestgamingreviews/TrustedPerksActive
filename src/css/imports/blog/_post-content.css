@@ -28,7 +28,7 @@
 .su-button {
   background: var(--custom-color-5);
   border: none;
-  color: var(--custom-color-4) !important;
+  color: #fff !important;
   padding: 10px 30px;
   font-size: 22px !important;
   line-height: 1.1rem;

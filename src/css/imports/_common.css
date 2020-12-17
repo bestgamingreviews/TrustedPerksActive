@@ -302,6 +302,17 @@ table {
 .content li + li {
   margin-top: 0.25em;
 }
+
+.btn, .btn:hover {
+	color: #fff !important;
+}
+
+.tablepress thead th {
+	    color: #fff;
+}
+
+
+
 .content p:not(:last-child),
 .content ul:not(:last-child) {
   margin-bottom: 1em;

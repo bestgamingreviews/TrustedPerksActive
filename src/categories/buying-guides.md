@@ -1,8 +1,13 @@
 ---
 templateKey: category-page
-title: "Buying Guides"
+title: Buying Guides
 slug: buying-guides
-description: "Buying the best possible product of our choice is not the end task to do. The real challenge begins when we search for the proper detail guide related to that particular product. The Buying guide, that not only provide the best knowledge about the products from every perspective but also kept us up to date about those products."
-seoTitle: "Buying Guides of Products & Their ProsnCons"
-seoDescription: "The Buying guide, that not only provide the best knowledge about the products from every perspective but also kept us up to date about those products."
+description: Buying the best product might not be an easy job for you. Leave
+  that to us. We analyze more than 20 different factors that disturb the
+  performance of Tools. On ToolGears we usually rank Products from 1 - 10
+  According to the Performance, Price, Durability, Shape & Many More. Do
+  checkout our Buyer's Guide on Tool Gears.
+seoTitle: Buyer's Guide With Top 10 Lists & Reviews
+seoDescription: Checkout our Top 10 List of Best Products in our Buyer's Guide
+  Archive only on Tool Gears.
 ---

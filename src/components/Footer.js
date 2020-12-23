@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "gatsby";
 import SocialIcons from "./SocialIcons.js";
-import useSiteMetaData from "./SiteMetadata";
+import SiteMetaData from "./SiteMetadata";
 
 const Footer = () => {
   const [footerBarActiveClass, setFooterBarActiveClass] = useState("");
   const [footerActive, setFooterActive] = useState(false);
-  const { name } = useSiteMetaData();
+  const { title, logoLarge, footerNav, dmca, dmcaLink } = SiteMetaData();
+  const img = logoLarge?.base;
+  const imgWidth = logoLarge.childImageSharp?.original?.width;
+  const imgHeight = logoLarge.childImageSharp?.original?.height;
 
   const toggleFooterHamburger = () => {
     !footerActive ? setFooterBarActiveClass("is-active") : setFooterBarActiveClass("");
@@ -19,7 +22,7 @@ const Footer = () => {
         <div className="footer-logo has-text-centered">
           <div className="logo-container">
             <Link to="/">
-              <img src="/useful-img/logo-large.png" alt={name} loading="lazy" width="280" height="90" />
+              <img src={`/img/${img}`} alt={title} loading="lazy" width={imgWidth} height={imgHeight} />
             </Link>
           </div>
         </div>
@@ -32,35 +35,25 @@ const Footer = () => {
           </div>
           <div id="footerMenu" className={`footer-menu ${footerBarActiveClass}`}>
             <div className="footerbar">
-              <Link className="footerbar-item" to="/about-us/">
-                About Us
-              </Link>
-              <Link className="footerbar-item" to="/contact-us/">
-                Contact Us
-              </Link>
-              <Link className="footerbar-item" to="/affiliate-disclosure/">
-                Affiliate Disclosure
-              </Link>
-              <Link className="footerbar-item" to="/terms-of-service/">
-                Terms of Service
-              </Link>
-              <Link className="footerbar-item" to="/privacy-policy/">
-                Privacy Policy
-              </Link>
-              <a className="footerbar-item" href="/sitemap.xml">
-                Sitemap
-              </a>
+              {footerNav.map((item, index) => {
+                return (
+                  <Link className="footerbar-item" to={item.link.includes("/") ? item.link : `/${item.link}/`} key={index}>
+                    {item.title}
+                  </Link>
+                );
+              })}
             </div>
           </div>
-
           <SocialIcons />
           <div className="footer-text">
-            <div className="protected-img">
-              <a href="google.com">
-                <img src="/useful-img/dmca.png" alt="DMCA.com Protection Status" loading="lazy" width="121" height="24" />
-              </a>
-            </div>
-            <p>{name} © 2020. All rights reserved.</p>
+            {dmca && (
+              <div className="protected-img">
+                <a href={dmcaLink}>
+                  <img src="/useful-img/dmca.png" alt="DMCA.com Protection Status" loading="lazy" width="121" height="24" />
+                </a>
+              </div>
+            )}
+            <p>{title} © 2020. All rights reserved.</p>
           </div>
         </div>
       </div>

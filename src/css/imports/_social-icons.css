@@ -16,7 +16,7 @@
   background-color: var(--custom-color-6);
 }
 .social-icon svg {
-  color: #fff;
+  color: var(--custom-color-7);
   position: absolute;
   display: block;
   top: 50%;

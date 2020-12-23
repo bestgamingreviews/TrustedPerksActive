@@ -13,14 +13,16 @@ import RatingBox from "../components/blog/RatingBox";
 import TopArrow from "../svg-icons/top-arrow.js";
 import { Disqus } from "gatsby-plugin-disqus";
 import LazyLoad from "react-lazy-load";
-import useSiteMetaData from "../components/SiteMetadata.js";
+import SiteMetaData from "../components/SiteMetadata.js";
 import SidebarLatestPosts from "../components/sidebar/SidebarLatestPosts";
 import SidebarTableofContents from "../components/sidebar/SidebarTableofContents";
 import Search from "../components/SearchForm";
+import { FindCategory, CreateID } from "../components/SimpleFunctions.js";
 
 export const BlogPostTemplate = (props) => {
-  const { name: siteName } = useSiteMetaData();
-  const { content, title, helmet, date, image, sidebar, faq, author, rating, rcount, rvalue, tableofcontent, link, tocdata, beforeBody, afterBody, products, productstabletitle, productstable } = props;
+  const { title: siteName } = SiteMetaData();
+  const { content, title, helmet, date, image, sidebar, faq, author, rating, rcount, rvalue } = props;
+  const { tableofcontent, link, tocdata, beforeBody, afterBody, products, table } = props;
   const [btT, setBtT] = useState("");
   const contentRef = useRef(null);
   const [topOffset, setTopOffset] = useState(900000000);
@@ -98,8 +100,8 @@ export const BlogPostTemplate = (props) => {
               </div>
             </div>
             {tableofcontent && <PostComps.TableOfContents data={tocdata} />}
-            {productstable && !!products?.length && <PostComps.PTitle title={productstabletitle} cName="is-bold is-center" />}
-            {productstable && !!products?.length && <PostComps.ProductsTable products={products} />}
+            {table?.table && table?.title && !!products?.length && <PostComps.PTitle title={table?.title} cName="is-bold is-center" />}
+            {table?.table && !!products?.length && <PostComps.ProductsTable products={products} title={table?.seoTitle} />}
             <div ref={contentRef} className="post-content">
               <div className="post-text">
                 <MDXProvider components={PostComps}>
@@ -109,13 +111,13 @@ export const BlogPostTemplate = (props) => {
               {products?.map((item, index) => (
                 <div className="product-box" key={index}>
                   <PostComps.PTitle hlevel="3" title={item.name} />
-                  <PostComps.PImage link={item.link} alt={item.name} src={item.image?.base} />
-                  <PostComps.SpecTable spec={item.specs} />
+                  <PostComps.PImage alt={item.name} src={item.image?.base} link={item.link} />
+                  {!!item.specs?.length && <PostComps.SpecTable spec={item.specs} />}
                   <MDXProvider components={PostComps}>
                     <MDXRenderer>{item.body}</MDXRenderer>
                   </MDXProvider>
-                  <PostComps.ProsNCons pros={item.pros} cons={item.cons} />
-                  <PostComps.BButton link={item.link} />
+                  {(!!item.pros?.length || !!item.cons?.length) && <PostComps.ProsNCons pros={item.pros} cons={item.cons} />}
+                  <PostComps.BButton link={item.link} title={item.btnText} />
                 </div>
               ))}
             </div>
@@ -136,7 +138,7 @@ export const BlogPostTemplate = (props) => {
               </div>
             )}
             {rating && <RatingBox count={rcount} value={rvalue} />}
-            <Author authorName={author} />
+            <Author authorID={author} />
             <div id="disqus_thread">
               <LazyLoad offsetTop={topOffset}>
                 <Disqus config={disqusConfig} />
@@ -174,13 +176,12 @@ BlogPostTemplate.propTypes = {
 };
 
 const BlogPost = (props) => {
-  const { siteURL, name: siteName } = useSiteMetaData();
+  const { siteURL, title: siteName, logoLarge } = SiteMetaData();
   const { mdx: post } = props.data;
   const { frontmatter } = post;
   const { base: img } = post.frontmatter.featuredimage;
   const path = `${siteURL}/${post.frontmatter.slug}/`;
-  const categories = props.data.allMarkdownRemark.categories;
-  const categoryLink = categories.filter((_category) => _category.frontmatter.title === frontmatter.category)[0].fields.slug;
+  const { categoryName, categoryLink } = FindCategory(frontmatter.category);
 
   const articleSchema = `{
     "@context": "https://schema.org",
@@ -204,7 +205,7 @@ const BlogPost = (props) => {
       "name": "${siteName}",
       "logo": {
         "@type": "ImageObject",
-        "url": "${siteURL}/useful-img/logo-large.png"
+        "url": "${siteURL}/img/${logoLarge.base}"
       }
     }
   }`;
@@ -254,14 +255,8 @@ const BlogPost = (props) => {
           (item, index) => `{
         "@type":"ListItem",
         "position":${index + 1},
-        "url":"${path}#${item.name
-            .replace(/[^\w ]/, "")
-            .split(" ")
-            .join("_")}",
-        "@id":"#${item.name
-          .replace(/[^\w ]/, "")
-          .split(" ")
-          .join("_")}",
+        "url":"${path}#${CreateID(item.name)}",
+        "@id":"#${CreateID(item.name)}",
         "name":"${item.name}"
       }`
         )
@@ -270,7 +265,7 @@ const BlogPost = (props) => {
   }`;
 
   return (
-    <Layout type="post" title={frontmatter.title} titleParent={frontmatter.category} link={`${categoryLink}/`}>
+    <Layout type="post" title={frontmatter.title} titleParent={categoryName} link={`${categoryLink}/`}>
       <BlogPostTemplate
         content={post.body}
         helmet={
@@ -296,8 +291,7 @@ const BlogPost = (props) => {
         beforeBody={frontmatter.beforebody}
         afterBody={frontmatter.afterbody}
         products={frontmatter.products}
-        productstabletitle={frontmatter.productstabletitle}
-        productstable={frontmatter.productstable}
+        table={frontmatter.table}
       />
     </Layout>
   );
@@ -340,8 +334,11 @@ export const pageQuery = graphql`
         rcount
         rvalue
         beforebody
-        productstable
-        productstabletitle
+        table {
+          table
+          title
+          seoTitle
+        }
         products {
           name
           link
@@ -362,6 +359,7 @@ export const pageQuery = graphql`
             name
             value
           }
+          btnText
         }
         afterbody
         category
@@ -387,17 +385,6 @@ export const pageQuery = graphql`
         faq {
           ans
           ques
-        }
-      }
-    }
-    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "category-page" } } }) {
-      categories: nodes {
-        id
-        fields {
-          slug
-        }
-        frontmatter {
-          title
         }
       }
     }

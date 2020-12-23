@@ -1,10 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import useSiteMetaData from "./SiteMetadata";
+import SiteMetaData from "./SiteMetadata";
 import { graphql, useStaticQuery, withPrefix } from "gatsby";
 
 const HeadData = (props) => {
-  const { siteURL, name: siteName } = useSiteMetaData();
+  const { siteURL, title: siteName, logoLarge, faviconSmall, faviconLarge } = SiteMetaData();
   const { title, description, image, schema } = props;
   const {
     allMarkdownRemark: { nodes: categories },
@@ -46,12 +46,12 @@ const HeadData = (props) => {
       <meta property="og:title" content={`${title}`} />
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={siteName} />
-      <meta property="og:image" content={`${siteURL}/${`img/${image}` || "useful-img/logo-large.png"}`} />
+      <meta property="og:image" content={`${siteURL}/${`img/${image || logoLarge.base}`}`} />
       <meta name="twitter:card" content="" />
       <meta name="twitter:creator" content="" />
       <meta name="twitter:site" content="" />
-      <link rel="icon" type="image/png" href={`${withPrefix("/")}img/favicon-32x32.jpg`} sizes="32x32" />
-      <link rel="icon" type="image/png" href={`${withPrefix("/")}img/favicon-16x16.jpg`} sizes="16x16" />
+      <link rel="icon" type="image/png" href={`${withPrefix("/")}img/${faviconLarge.base}`} sizes="32x32" />
+      <link rel="icon" type="image/png" href={`${withPrefix("/")}img/${faviconSmall.base}`} sizes="16x16" />
       <script type="application/ld+json">{sitemapschema}</script>
       {index ? <meta name="robots" content="index, follow" /> : <meta name="robots" content="noindex" />}
       {index && <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}

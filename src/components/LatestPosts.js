@@ -1,7 +1,8 @@
 import React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
+import { FillSpace, FindCategory } from "../components/SimpleFunctions.js";
 
-const LatestPosts = (props) => {
+const LatestPosts = () => {
   const lp = useStaticQuery(graphql`
     {
       allMdx(sort: { order: DESC, fields: [frontmatter___date] }, limit: 3) {
@@ -31,14 +32,6 @@ const LatestPosts = (props) => {
 
   const { nodes: posts } = lp.allMdx;
 
-  const FillSpace = (catLength) => {
-    const space = [];
-    for (var i = 3; i > catLength; i--) {
-      space.push(<div className="index-column" key={i}></div>);
-    }
-    return space;
-  };
-
   return (
     <div className="category-section latest-posts">
       <p className="lp-title">Latest Posts</p>
@@ -49,6 +42,7 @@ const LatestPosts = (props) => {
           const { title, category } = post.frontmatter;
           const { name: imgName, base: img } = post.frontmatter.featuredimage;
           const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
+          const { categoryName, categoryLink } = FindCategory(category);
 
           return (
             <div className="index-column" key={id}>
@@ -61,7 +55,7 @@ const LatestPosts = (props) => {
                 </Link>
               </div>
               <div className="index-box-category">
-                <Link to={`/${category.toLowerCase().split(" ").join("-")}/`}>{category}</Link>
+                <Link to={`${categoryLink}/`}>{categoryName}</Link>
               </div>
               <div className="index-box-title">
                 <Link to={`${slug}/`}>{title}</Link>
@@ -69,7 +63,7 @@ const LatestPosts = (props) => {
             </div>
           );
         })}
-        {FillSpace(posts.length)}
+        {FillSpace(posts.length, "index-column", 3)}
       </div>
     </div>
   );

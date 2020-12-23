@@ -11,7 +11,6 @@
 .navbar-brand {
   align-items: center;
   display: flex;
-  flex-shrink: 0;
 }
 .navbar-brand a.navbar-item:focus,
 .navbar-brand a.navbar-item:hover {
@@ -20,17 +19,15 @@
 .navbar-burger {
   cursor: pointer;
   display: block;
-  height: 3.25rem;
+  min-height: 3.25rem;
   position: relative;
-  width: 3.25rem;
+  min-width: 3.25rem;
   margin-left: auto;
   background-color: var(--custom-color-5);
-  color: var(--custom-color-4);
-  border-radius: 3px;
 }
 .navbar-burger span,
 .footer-burger span {
-  background-color: currentColor;
+  background-color: var(--custom-color-7);
   display: block;
   height: 1px;
   left: calc(50% - 8px);
@@ -71,88 +68,51 @@
 }
 .navbar-item {
   color: var(--custom-color-4);
-  display: block;
   line-height: 1.5;
-  padding: 0.5rem 0.75rem;
   position: relative;
   font-weight: 500;
-}
-.navbar-item .icon:only-child {
-  margin-left: -0.25rem;
-  margin-right: -0.25rem;
-}
-
-a.navbar-item {
   cursor: pointer;
-}
-a.navbar-item:focus,
-a.navbar-item:focus-within,
-a.navbar-item:hover,
-a.navbar-item.is-active {
-  background-color: var(--custom-color-6);
-}
-.navbar-item {
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-div#navMenu span.navbar-item .open-parent {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 1;
-  height: 100%;
-  width: 40px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-}
-div#navMenu span.navbar-item svg {
-  width: 12px;
-  transition: 0.3s ease;
-}
-div#navMenu .navbar-item.nav-parent {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
-}
-div#navMenu .nav-parent .parent-data {
-  position: relative;
-}
-.nav-child {
-  display: none;
-  flex-direction: row;
-}
-.nav-child .child-sec {
-  padding: 10px;
-}
-.nav-child .child-sec a {
-  color: #fff;
-}
-.child-sec li {
-  list-style-type: none;
-}
-.nav-child .child-sec p {
-  padding: 3px;
-}
-.nav-child .child-sec li:last-child {
-  margin-bottom: 0;
-}
-.nav-child .child-sec li {
-  margin-bottom: 5px;
-}
-div#navMenu .nav-parent:hover .nav-child,
-div#navMenu .nav-parent:focus .nav-child {
-  display: flex;
-}
-div#navMenu .parent-data a.navbar-item {
-  border-bottom: 0;
 }
 .navbar-brand .logo-container {
-  height: auto;
   display: flex;
+  padding-right: 20px;
+}
+.navbar-item-link {
+  color: var(--custom-color-4);
+  padding: 0.5rem 0.75rem;
+}
+.nav-child-first {
+  display: none;
+  overflow: hidden;
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--custom-color-1);
+}
+.open-parent svg {
+  width: 12px;
+  margin: auto;
+  transition: color 0.3s ease-out;
+  pointer-events: none;
+}
+.navbar-parent-one .nav-child-first {
+  flex-direction: column;
+}
+.navbar-parent-two .navbar-item {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.navbar-parent-two .nav-child-first > .navbar-item > .navbar-item-link {
+  color: var(--custom-color-4);
+}
+.open-parent {
+  display: flex;
+  height: 40px;
+  width: 40px;
 }
 @media screen and (max-width: 1023px) {
   .navbar > .container {
@@ -163,56 +123,53 @@ div#navMenu .parent-data a.navbar-item {
     display: flex;
   }
   div#navMenu .navbar-end {
-    margin: 0.5rem 10px;
-    border-radius: 8px;
+    margin-top: 10px;
     background-color: var(--custom-color-5);
-    overflow: hidden;
   }
-  div#navMenu .navbar-item {
-    padding: 13px 20px;
-    border-bottom: 1px solid #fff;
-    color: #fff;
+  .navbar-item {
+    border-bottom: 1px solid var(--custom-color-7);
   }
-  div#navMenu .nav-parent.active .nav-child {
-    display: flex;
-  }
-  div#navMenu .navbar-item:last-child {
+  .navbar-item:last-child {
     border-bottom: 0;
   }
-  .nav-child .child-sec li {
-    border-bottom: 1px solid #fff;
-    padding-bottom: 2px;
+  .navbar-parent-two > .nav-child-first > .navbar-item:nth-last-child(2):nth-child(odd) {
+    border-bottom: 0;
   }
-  .nav-child .child-sec li:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  div#navMenu span.navbar-item .open-parent svg {
-    transition: 0.3s all ease-out;
-    transform: rotate(0);
-  }
-  div#navMenu span.navbar-item.active .open-parent svg {
-    transform: rotate(-90deg);
-  }
-  div#navMenu .nav-parent .nav-child {
+  .nav-child-first {
+    position: static;
+    transform: none;
+    width: 100%;
     flex-wrap: wrap;
+    background: var(--custom-color-5);
   }
-  div#navMenu span.navbar-item .open-parent {
-    width: 60px;
-    border-left: 1px solid #fff;
+  .open-parent {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
-  .nav-child .child-sec p {
-    border: 1px solid #fff;
-    margin-bottom: 10px;
-    padding: 3px;
-  }
-  .nav-child .child-sec {
-    border-top: 1px solid #fff;
+  .navbar-parent-two > .nav-child-first > .navbar-item {
     width: 50%;
-    flex: auto;
+    padding: 5px;
+  }
+  .nav-child-first {
+    border-style: solid;
+    border-color: var(--custom-color-4);
+    border-width: 1px 1px 0;
+  }
+  .navbar-menu {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+  }
+  .navbar-parent-two > .nav-child-first > .navbar-item > .navbar-item-link {
+    border: 1px solid var(--custom-color-4);
+    pointer-events: none;
+    padding: 5px 0;
+  }
+  .open-parent.open + .nav-child-first {
+    display: flex;
   }
 }
-
 @media screen and (min-width: 1024px) {
   .navbar,
   .navbar-menu,
@@ -235,15 +192,11 @@ div#navMenu .parent-data a.navbar-item {
   .navbar-menu {
     flex-grow: 1;
     justify-content: flex-end;
+    align-items: center;
   }
   .navbar-start {
     justify-content: flex-start;
     margin-right: auto;
-  }
-  .navbar-end {
-    justify-content: flex-end;
-    margin-left: auto;
-    height: 100%;
   }
   .navbar .container .navbar-menu {
     margin-right: -0.75rem;
@@ -254,47 +207,28 @@ div#navMenu .parent-data a.navbar-item {
   a.navbar-item.is-active:not(:focus):not(:hover) {
     background-color: transparent;
   }
-  div#navMenu,
-  div#navMenu .nav-child-container {
+  div#navMenu {
     height: auto !important;
     overflow: visible !important;
   }
-  div#navMenu > div,
-  div#navMenu .nav-child-container > div {
-    display: block !important;
-  }
-  .parent-data a.navbar-item {
-    padding-right: 0;
-  }
-  div#navMenu span.navbar-item .open-parent {
-    position: static;
-  }
-  div#navMenu .nav-parent .parent-data {
-    display: flex;
-  }
-  div#navMenu .nav-parent .nav-child {
-    position: absolute;
-    background-color: var(--custom-color-1);
-    top: 50px;
-    right: -160px;
-    width: 940px;
-    border-radius: 5px;
-    box-shadow: 0 1px 8px 0 hsla(0, 0%, 58.8%, 0.72);
-    justify-content: space-evenly;
-  }
-  .nav-child .child-sec p {
-    font-weight: bold;
-  }
-  .nav-child .child-sec a {
-    color: var(--custom-color-5);
-  }
-  .nav-child .child-sec a:hover {
-    opacity: 0.8;
+  .navbar-item-link {
+    white-space: nowrap;
   }
   .navbar-item:hover a,
   .navbar-item:focus a,
   .navbar-item:hover svg,
   .navbar-item:focus svg {
+    color: var(--custom-color-5);
+  }
+  .navbar-parent-one > .navbar-item-link,
+  .navbar-parent-two > .navbar-item-link {
+    padding-right: 0;
+  }
+  .navbar-item:hover .nav-child-first,
+  .navbar-item:focus .nav-child-first {
+    display: flex;
+  }
+  .navbar-item .navbar-item .navbar-item-link {
     color: var(--custom-color-5);
   }
 }

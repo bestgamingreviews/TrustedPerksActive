@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CreateID } from "../SimpleFunctions.js";
 
 const SidebarTableofContents = ({ data }) => {
   const [bSidebar, setBSidebar] = useState("");
@@ -24,10 +25,7 @@ const SidebarTableofContents = ({ data }) => {
             <p className="toctitle">Table of Contents</p>
             <ul>
               {sToC.map((item, index) => {
-                const id = `#${item.name
-                  .replace(/[^\w ]/, "")
-                  .split(" ")
-                  .join("_")}`;
+                const id = `#${CreateID(item.name)}`;
                 const { name, level } = item;
 
                 return (

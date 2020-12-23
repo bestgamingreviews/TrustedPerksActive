@@ -1,4 +1,5 @@
 ---
+id: 30900a28-b87e-49f3-a334-ea2836d9adde
 templateKey: category-page
 title: Learning Guides
 slug: learning-guides

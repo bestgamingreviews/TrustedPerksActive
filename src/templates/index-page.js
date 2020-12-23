@@ -4,32 +4,29 @@ import { Link, graphql } from "gatsby";
 import Layout from "../components/Layout";
 import HeadData from "../components/HeadData.js";
 import Calendar from "../svg-icons/calendar.js";
-import useSiteMetaData from "../components/SiteMetadata.js";
-import Categories from "../components/fragments/IndexCategories.js";
+import SiteMetaData from "../components/SiteMetadata.js";
+import { FindCategory, FillSpace } from "../components/SimpleFunctions.js";
 
 const IndexTemplate = ({ data }) => {
   const singlePost = data.FP.nodes[0];
   const otherPosts = data.OP.nodes;
-  const sections = data.categories.group.map(({ category }) => {
-    const posts = data.posts.nodes.filter((post) => post.frontmatter.category === category).slice(0, 5);
-    return { title: category, posts };
-  });
-  const {
-    siteURL,
-    title,
-    name,
-    description,
-    number,
-    social: { facebook, youtube, instagram, twitter },
-  } = useSiteMetaData();
-  const AllCategories = Categories();
+  const allPosts = data.posts.nodes;
+  const sections = data.allMarkdownRemark.categories
+    .map((category) => {
+      const posts = allPosts.filter((post) => post.frontmatter.category === category.frontmatter.id).slice(0, 6);
+      return { title: category.frontmatter.title, posts };
+    })
+    .filter((category) => category.posts.length);
+  const { seoTitle: title, seoDescription: description } = data.markdownRemark.frontmatter;
+  const { siteURL, title: siteName, number, facebook, youtube, twitter, logoLarge } = SiteMetaData();
+  const homeCategories = data.markdownRemark.frontmatter.categories;
 
   const websiteSchema = `{
       "@context":"https://schema.org",
       "@type":"WebSite",
       "@id":"${siteURL}/#website",
       "headline":"${title}",
-      "name":"${name}",
+      "name":"${siteName}",
       "description":"${description}",
       "url":"${siteURL}",
       "potentialAction":{
@@ -43,17 +40,16 @@ const IndexTemplate = ({ data }) => {
         "@context":"https://schema.org",
         "@type":"NewsMediaOrganization",
         "@id":"${siteURL}/#Organization",
-        "name":"${name}",
+        "name":"${siteName}",
         "url":"${siteURL}",
         "sameAs":[
           "${facebook}",
           "${youtube}",
-          "${instagram}",
           "${twitter}"
         ],
         "logo":{
           "@type":"ImageObject",
-          "url":"${siteURL}/useful-img/logo-large.png",
+          "url":"${siteURL}/img/${logoLarge.base}",
           "width":"800",
           "height":"258"
         },
@@ -78,26 +74,28 @@ const IndexTemplate = ({ data }) => {
             <OtherPosts posts={otherPosts} />
           </div>
           <div className="index-bottom-section">
-            <Sections data={sections} />
-            <div className="index-categories">
-              <div className="index-latest-title">
-                <h2>Categories</h2>
-              </div>
-              <div className="index-inner-categories">
-                {AllCategories.map((item, index) => (
-                  <div className="index-category" key={index}>
-                    <h2>{item.name} Guides</h2>
-                    <div className="category-links">
-                      {item.data.map((item, index) => (
-                        <div className="category-link" key={index}>
-                          <Link to={item.link}>{item.name}</Link>
-                        </div>
-                      ))}
+            <Sections sections={sections} />
+            {!!homeCategories.length && (
+              <div className="index-categories">
+                <div className="index-latest-title">
+                  <h2>Categories</h2>
+                </div>
+                <div className="index-inner-categories">
+                  {homeCategories.map((item, index) => (
+                    <div className="index-category" key={index}>
+                      <h2>{item.title}</h2>
+                      <div className="category-links">
+                        {item.links.map((item, index) => (
+                          <div className="category-link" key={index}>
+                            <Link to={item.link.includes("/") ? item.link : `/${item.link}/`}>{item.title}</Link>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -113,19 +111,12 @@ IndexTemplate.propTypes = {
   }),
 };
 
-const FillSpace = (catLength) => {
-  const space = [];
-  for (var i = 6; i > catLength; i--) {
-    space.push(<div className="index-column" key={i}></div>);
-  }
-  return space;
-};
-
 const FirstPost = ({ post }) => {
   const { title, category, date } = post.frontmatter;
   const { name: imgName, base: img } = post.frontmatter.featuredimage;
   const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
   const slug = post.fields.slug;
+  const { categoryName, categoryLink } = FindCategory(category);
 
   return (
     <div className="first-post">
@@ -140,7 +131,7 @@ const FirstPost = ({ post }) => {
       </div>
       <div className="first-post-info">
         <div className="post-info-category">
-          <Link to={`/${category.toLowerCase().split(" ").join("-")}/`}>{category}</Link>
+          <Link to={`${categoryLink}/`}>{categoryName}</Link>
         </div>
         <div className="post-info-title">
           <Link to={`${slug}/`}>{title}</Link>
@@ -161,6 +152,7 @@ const OtherPosts = ({ posts }) => (
       const { name: imgName, base: img } = post.frontmatter.featuredimage;
       const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
       const slug = post.fields.slug;
+      const { categoryName, categoryLink } = FindCategory(category);
 
       return (
         <div className="other-post" key={index}>
@@ -174,7 +166,7 @@ const OtherPosts = ({ posts }) => (
           </div>
           <div className="other-post-info">
             <div className="post-info-category">
-              <Link to={`/${category.toLowerCase().split(" ").join("-")}/`}>{category}</Link>
+              <Link to={`${categoryLink}/`}>{categoryName}</Link>
             </div>
             <div className="post-info-title">
               <Link to={`${slug}/`}>{title}</Link>
@@ -187,10 +179,10 @@ const OtherPosts = ({ posts }) => (
   </div>
 );
 
-const Sections = ({ data }) => {
+const Sections = ({ sections }) => {
   return (
     <div className="category-sections">
-      {data.map((category, index) => (
+      {sections.map((category, index) => (
         <div className="category-section" key={index}>
           <div className="index-latest-title">
             <h2>{category.title}</h2>
@@ -218,7 +210,7 @@ const Sections = ({ data }) => {
                 </div>
               );
             })}
-            {FillSpace(category.length)}
+            {FillSpace(category.posts.length)}
           </div>
         </div>
       ))}
@@ -227,7 +219,7 @@ const Sections = ({ data }) => {
 };
 
 export const IndexQuery = graphql`
-  query IndexQuery {
+  query IndexQuery($id: String!) {
     FP: allMdx(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1) {
       nodes {
         fields {
@@ -272,11 +264,6 @@ export const IndexQuery = graphql`
         }
       }
     }
-    categories: allMdx {
-      group(field: frontmatter___category) {
-        category: fieldValue
-      }
-    }
     posts: allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
       nodes {
         fields {
@@ -295,6 +282,31 @@ export const IndexQuery = graphql`
               }
             }
           }
+        }
+      }
+    }
+    markdownRemark(id: { eq: $id }) {
+      html
+      frontmatter {
+        seoTitle
+        seoDescription
+        categories {
+          title
+          links {
+            title
+            link
+          }
+        }
+      }
+    }
+    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "category-page" } } }) {
+      categories: nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          id
+          title
         }
       }
     }

@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import Layout from "../components/Layout";
 import HeadData from "../components/HeadData.js";
 import { graphql, Link } from "gatsby";
-import useSiteMetaData from "../components/SiteMetadata.js";
+import SiteMetaData from "../components/SiteMetadata.js";
+import { FindAuthor, FillSpace } from "../components/SimpleFunctions.js";
 
 const CategoryPage = (props) => {
   const { nodes: posts } = props.data.allMdx;
-  const authors = props.data.allMarkdownRemark.authors;
-  const { siteURL, name: siteName } = useSiteMetaData();
+  const { siteURL, title: siteName, logoLarge } = SiteMetaData();
   const cPage = props.data.markdownRemark.frontmatter;
   const firstPost = posts[0];
   const fSlug = firstPost && firstPost.fields.slug;
@@ -39,7 +39,7 @@ const CategoryPage = (props) => {
       "name": "${siteName}",
       "logo": {
         "@type": "ImageObject",
-        "url": "${siteURL}/useful-img/logo-large.png"
+        "url": "${siteURL}/img/${logoLarge.base}"
       }
     }
   }`;
@@ -49,14 +49,6 @@ const CategoryPage = (props) => {
   const isLast = currentPage === numPages;
   const prevPage = currentPage - 1 === 1 ? `${slug}/` : `${slug}/${currentPage - 1}/`;
   const nextPage = `${slug}/${currentPage + 1}/`;
-
-  const FillSpace = (catLength) => {
-    const space = [];
-    for (var i = 6; i > catLength; i--) {
-      space.push(<div className="category-column" key={i}></div>);
-    }
-    return space;
-  };
 
   return (
     <Layout>
@@ -74,7 +66,7 @@ const CategoryPage = (props) => {
                 const { base: img, name: imgName } = post.frontmatter.featuredimage;
                 const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
                 const slug = post.fields.slug;
-                const authorLink = authors.filter((_author) => _author.frontmatter.title === author)[0].fields.slug;
+                const { authorName, authorLink } = FindAuthor(author);
 
                 return (
                   <div className="category-column" key={post.id}>
@@ -93,13 +85,18 @@ const CategoryPage = (props) => {
                         <Link to={`${slug}/`}>{title}</Link>
                       </div>
                       <div className="category_box_info">
-                        <Link to={`/author${authorLink}/`}>{author}</Link> | {date}
+                        {authorName && (
+                          <>
+                            <Link to={`/author${authorLink}/`}>{authorName}</Link> |{" "}
+                          </>
+                        )}
+                        {date}
                       </div>
                     </div>
                   </div>
                 );
               })}
-              {FillSpace(posts.length)}
+              {FillSpace(posts.length, "category-column")}
             </div>
           </div>
           <div className="pagination">
@@ -135,7 +132,7 @@ CategoryPage.propTypes = {
 export default CategoryPage;
 
 export const pageQuery = graphql`
-  query CategoryPageByTag($category: String!, $id: String!, $skip: Int!, $limit: Int!) {
+  query CategoryPageByTag($id: String!, $category: String!, $skip: Int!, $limit: Int!) {
     allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { category: { eq: $category } } }, limit: $limit, skip: $skip) {
       nodes {
         excerpt(pruneLength: 400)
@@ -160,17 +157,6 @@ export const pageQuery = graphql`
               }
             }
           }
-        }
-      }
-    }
-    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "author-page" } } }) {
-      authors: nodes {
-        id
-        fields {
-          slug
-        }
-        frontmatter {
-          title
         }
       }
     }

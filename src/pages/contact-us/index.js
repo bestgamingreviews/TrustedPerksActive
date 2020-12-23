@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { navigate } from "gatsby-link";
 import Layout from "../../components/Layout";
 import HeadData from "../../components/HeadData.js";
-import useSiteMetaData from "../../components/SiteMetadata";
+import SiteMetaData from "../../components/SiteMetadata";
 
 function encode(data) {
   return Object.keys(data)
@@ -12,7 +12,7 @@ function encode(data) {
 
 const ContactUs = () => {
   const [state, setState] = useState({ isValidated: false });
-  const { name: siteName, siteURL } = useSiteMetaData();
+  const { title: siteName, siteURL, logoLarge } = SiteMetaData();
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -57,7 +57,7 @@ const ContactUs = () => {
       "name":"${siteName}",
       "logo":{
         "@type":"ImageObject",
-        "url":"${siteURL}/useful-img/logo-large.png",
+        "url":"${siteURL}/img/${logoLarge.base}",
         "width":"800",
         "height":"258"
       }

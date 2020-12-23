@@ -1,12 +1,3 @@
-:root {
-    --default-box-shadow: 0px 0px 3px 0px #828282;
-    --custom-color-1: #f7f7f7;
-    --custom-color-2: #fff;
-    --custom-color-3: #4f3c8b;
-    --custom-color-4: #000;
-    --custom-color-5: #4f3c8b;
-    --custom-color-6: #6c51bf;
-}
 html {
   scroll-behavior: smooth;
 }
@@ -154,7 +145,7 @@ table {
   font-size: 1rem;
   line-height: 1.25;
   background-color: var(--custom-color-5);
-  color: var(--custom-color-4);
+  color: var(--custom-color-7);
   border-radius: 0.25rem;
   text-decoration: none;
   font-weight: 700;
@@ -302,17 +293,6 @@ table {
 .content li + li {
   margin-top: 0.25em;
 }
-
-.btn, .btn:hover {
-	color: #fff !important;
-}
-
-.tablepress thead th {
-	    color: #fff;
-}
-
-
-
 .content p:not(:last-child),
 .content ul:not(:last-child) {
   margin-bottom: 1em;

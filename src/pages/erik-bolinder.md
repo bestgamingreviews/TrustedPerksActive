@@ -1,4 +1,5 @@
 ---
+id: 76f262e1-9325-48ec-beee-f472d201176a
 templateKey: author-page
 title: Erik Bolinder
 slug: Erik-Bolinder

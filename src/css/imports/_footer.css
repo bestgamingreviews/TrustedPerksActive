@@ -79,7 +79,7 @@
   }
   .footerbar {
     flex-direction: column;
-    background: var(--custom-color-1);
+    background: var(--custom-color-5);
     margin: 10px;
   }
   .footer-menu.is-active {

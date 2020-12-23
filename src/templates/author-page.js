@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import HeadData from "../components/HeadData.js";
-import useSiteMetaData from "../components/SiteMetadata.js";
+import SiteMetaData from "../components/SiteMetadata.js";
+import { FindCategory, FillSpace } from "../components/SimpleFunctions.js";
 
 const AuthorPage = (props) => {
-  const { name: siteName } = useSiteMetaData();
+  const { title: siteName } = SiteMetaData();
   const { data } = props;
   const { markdownRemark: post } = data;
   const { title, description, seoTitle, seoDescription } = post.frontmatter;
@@ -49,7 +50,6 @@ const AuthorPosts = (props) => {
   const isLast = currentPage === numPages;
   const prevPage = currentPage - 1 === 1 ? `${props.pageContext.slug}/` : `${props.pageContext.slug}/${currentPage - 1}/`;
   const nextPage = `${props.pageContext.slug}/${currentPage + 1}/`;
-  const categories = props.data.allMarkdownRemark.categories;
 
   return (
     <div className="latest-posts">
@@ -63,7 +63,7 @@ const AuthorPosts = (props) => {
               const { width, height } = post.frontmatter.featuredimage.childImageSharp.original;
               const slug = post.fields.slug;
               const id = post.id;
-              const categoryLink = categories.filter((_category) => _category.frontmatter.title === category)[0].fields.slug;
+              const { categoryName, categoryLink } = FindCategory(category);
 
               return (
                 <div className="category-column" key={id}>
@@ -82,12 +82,18 @@ const AuthorPosts = (props) => {
                       <Link to={`${slug}/`}>{title}</Link>
                     </div>
                     <div className="category_box_info">
-                      <Link to={`${categoryLink}/`}>{category}</Link> | {date}
+                      {categoryName && (
+                        <>
+                          <Link to={`${categoryLink}/`}>{categoryName}</Link> |{" "}
+                        </>
+                      )}
+                      {date}
                     </div>
                   </div>
                 </div>
               );
             })}
+          {FillSpace(posts.length, "category-column")}
         </div>
       </div>
       <div className="pagination">
@@ -113,8 +119,8 @@ const AuthorPosts = (props) => {
 export default AuthorPage;
 
 export const authorPageQuery = graphql`
-  query AuthorPageByID($id: String!, $category: String!, $skip: Int!, $limit: Int!) {
-    allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { author: { eq: $category } } }, limit: $limit, skip: $skip) {
+  query AuthorPageByID($id: String!, $author: String!, $skip: Int!, $limit: Int!) {
+    allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { author: { eq: $author } } }, limit: $limit, skip: $skip) {
       edges {
         node {
           id
@@ -136,17 +142,6 @@ export const authorPageQuery = graphql`
               }
             }
           }
-        }
-      }
-    }
-    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "category-page" } } }) {
-      categories: nodes {
-        id
-        fields {
-          slug
-        }
-        frontmatter {
-          title
         }
       }
     }

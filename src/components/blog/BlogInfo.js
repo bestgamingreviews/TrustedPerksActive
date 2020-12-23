@@ -4,11 +4,11 @@ import CommentDots from "../../svg-icons/comment-dots.js";
 import Facebook from "../../svg-icons/facebook.js";
 import Twitter from "../../svg-icons/twitter.js";
 import Pinterest from "../../svg-icons/pinterest.js";
-import useSiteMetaData from "../SiteMetadata.js";
+import SiteMetaData from "../SiteMetadata.js";
 import { CommentCount } from "gatsby-plugin-disqus";
 
 const BlogInfo = (props) => {
-  const { siteURL } = useSiteMetaData();
+  const { siteURL } = SiteMetaData();
 
   return (
     <div className="post-top-section">

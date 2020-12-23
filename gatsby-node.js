@@ -8,13 +8,14 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      pages: allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "default-page" } } }) {
+      pages: allMarkdownRemark(filter: { frontmatter: { templateKey: { in: ["default-page", "index-page"] } } }) {
         nodes {
           id
           fields {
             slug
           }
           frontmatter {
+            templateKey
             title
           }
         }
@@ -26,7 +27,7 @@ exports.createPages = ({ actions, graphql }) => {
             slug
           }
           frontmatter {
-            title
+            id
           }
         }
       }
@@ -43,7 +44,7 @@ exports.createPages = ({ actions, graphql }) => {
             slug
           }
           frontmatter {
-            title
+            id
           }
         }
       }
@@ -62,7 +63,6 @@ exports.createPages = ({ actions, graphql }) => {
             slug
           }
           frontmatter {
-            templateKey
             title
             category
             beforebody
@@ -101,22 +101,32 @@ exports.createPages = ({ actions, graphql }) => {
     const authors = result.data.authors.nodes;
     const authorsCount = result.data.authorsCount.group;
 
+    const allImages = [];
+
+    const CreateID = (name) =>
+      name
+        .replace(/[^\w ]/, "")
+        .split(" ")
+        .join("_");
+
     const createImages = async (match, type, options, mobile = false) => {
-      const stream = sharp(match);
       const name = match.split("/").filter(Boolean).pop();
       const lastDot = name.lastIndexOf(".");
       const fileName = name.substring(0, lastDot);
-      const path = "./static/image";
-      const newPath = mobile ? `${path}/${type}/${fileName}-m.webp` : `${path}/${type}/${fileName}.webp`;
-      await stream.resize(options).webp({ quality: 100 }).toFile(newPath);
+      const newPath = mobile ? `./static/image/${type}/${fileName}-m.webp` : `./static/image/${type}/${fileName}.webp`;
+      if (!allImages.includes(newPath)) {
+        allImages.push(newPath);
+        const stream = sharp(match);
+        await stream.resize(options).webp({ quality: 100 }).toFile(newPath);
+      }
     };
 
     const createCategories = () => {
       categories.forEach((category) => {
         const id = category.id;
-        const title = category.frontmatter.title;
+        const categoryID = category.frontmatter.id;
         const slug = category.fields.slug;
-        const categoryCount = categoriesCount.filter((categoryCount) => categoryCount.category === title)[0];
+        const categoryCount = categoriesCount.filter((categoryCount) => categoryCount.category === categoryID)[0];
         const totalPosts = categoryCount && categoryCount.totalCount;
         const postsPerPage = 6;
         const numPages = totalPosts ? Math.ceil(totalPosts / postsPerPage) : 1;
@@ -128,7 +138,7 @@ exports.createPages = ({ actions, graphql }) => {
             context: {
               id,
               slug: slug,
-              category: title,
+              category: categoryID,
               limit: postsPerPage,
               skip: i * postsPerPage,
               numPages,
@@ -141,30 +151,12 @@ exports.createPages = ({ actions, graphql }) => {
 
     createCategories();
 
-    const createPages = () => {
-      pages.forEach((page) => {
-        const id = page.id;
-        const slug = page.fields.slug;
-
-        createPage({
-          path: slug == "/index" ? "/" : `${slug}/`,
-          component: path.resolve(`src/templates/default-page.js`),
-          // additional data can be passed via context
-          context: {
-            id,
-          },
-        });
-      });
-    };
-
-    createPages();
-
     const createAuthors = () => {
       authors.forEach((author) => {
         const id = author.id;
-        const title = author.frontmatter.title;
+        const authorID = author.frontmatter.id;
         const slug = `/author${author.fields.slug}`;
-        const authorCount = authorsCount.filter((authorCount) => authorCount.author === title)[0];
+        const authorCount = authorsCount.filter((authorCount) => authorCount.author === authorID)[0];
         const totalPosts = authorCount && authorCount.totalCount;
         const postsPerPage = 6;
         const numPages = totalPosts ? Math.ceil(totalPosts / postsPerPage) : 1;
@@ -176,7 +168,7 @@ exports.createPages = ({ actions, graphql }) => {
             context: {
               id,
               slug: slug,
-              category: title,
+              author: authorID,
               limit: postsPerPage,
               skip: i * postsPerPage,
               numPages,
@@ -189,11 +181,29 @@ exports.createPages = ({ actions, graphql }) => {
 
     createAuthors();
 
+    const createPages = () => {
+      pages.forEach((page) => {
+        const id = page.id;
+        const slug = page.fields.slug;
+        const tempKey = page.frontmatter.templateKey;
+
+        createPage({
+          path: slug == "/index" ? "/" : `${slug}/`,
+          component: path.resolve(`src/templates/${tempKey}.js`),
+          // additional data can be passed via context
+          context: {
+            id,
+          },
+        });
+      });
+    };
+
+    createPages();
+
     const createPosts = () => {
       posts.forEach((post) => {
         const id = post.id;
         const slug = post.fields.slug;
-        const tempKey = post.frontmatter.templateKey;
 
         const match = `./static/img/${post.frontmatter.featuredimage.base}`;
         createImages(match, "category", { width: 348 });
@@ -251,12 +261,7 @@ exports.createPages = ({ actions, graphql }) => {
           tocData.push({
             title,
             heading: heading || "2",
-            id:
-              title &&
-              title
-                .replace(/[^\w ]/, "")
-                .split(" ")
-                .join("_"),
+            id: title && CreateID(title),
           });
         }
 
@@ -265,10 +270,7 @@ exports.createPages = ({ actions, graphql }) => {
             tocData.push({
               title: item.name,
               heading: "3",
-              id: item.name
-                .replace(/[^\w ]/, "")
-                .split(" ")
-                .join("_"),
+              id: CreateID(item.name),
             });
           });
         }
@@ -286,18 +288,13 @@ exports.createPages = ({ actions, graphql }) => {
           tocData.push({
             title,
             heading: heading || "2",
-            id:
-              title &&
-              title
-                .replace(/[^\w ]/, "")
-                .split(" ")
-                .join("_"),
+            id: title && CreateID(title),
           });
         }
 
         createPage({
           path: slug == "/index" ? "/" : `${slug}/`,
-          component: path.resolve(`src/templates/${tempKey}.js`),
+          component: path.resolve(`src/templates/blog-post.js`),
           // additional data can be passed via context
           context: {
             id,
@@ -324,14 +321,18 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
   type MdxFrontmatter {
     beforebody: String @mdx
     afterbody: String @mdx
-    products: [MdxBody]
+    products: [Product]
     sidebar: Sidebar
     faq: [Faq]
+    table: ProductTable
       title: String
+    btnText: String
   }
 
-  type MdxBody {
+  type Product {
     name: String
+    seoName: String
+    btnText: String
     body: String @mdx
     image: File
     link: String
@@ -361,6 +362,45 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
   type Faq {
     ques: String
     ans: String
+  }
+
+  type ProductTable {
+    table: Boolean
+    title: String
+    seoTitle: String
+  }
+
+  type MarkdownRemark implements Node {
+    frontmatter: MarkdownFrontmatter
+  }
+
+  type MarkdownFrontmatter {
+    templateKey: String
+    id: String
+    categories: [HomeCategory]
+    title: String
+    description: String
+    seoTitle: String
+    seoDescription: String
+    schema: String
+    topNav: [Nav]
+    footerNav: [CategoryLink]
+  }
+
+  type HomeCategory {
+    title: String
+    links: [CategoryLink]
+  }
+
+  type CategoryLink {
+    title: String
+    link: String
+  }
+
+  type Nav {
+    title: String
+    link: String
+    child: [Nav]
   }
 `);
 };

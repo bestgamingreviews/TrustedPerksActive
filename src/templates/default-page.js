@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Content, { HTMLContent } from "../components/Content";
 import HeadData from "../components/HeadData.js";
-import useSiteMetaData from "../components/SiteMetadata.js";
+import SiteMetaData from "../components/SiteMetadata.js";
 
 export const DefaultPageTemplate = ({ title, content, contentComponent }) => {
   const PageContent = contentComponent || Content;
@@ -28,7 +28,7 @@ DefaultPageTemplate.propTypes = {
 };
 
 const DefaultPage = ({ data }) => {
-  const { name: siteName } = useSiteMetaData();
+  const { title: siteName } = SiteMetaData();
   const { markdownRemark: post } = data;
 
   return (

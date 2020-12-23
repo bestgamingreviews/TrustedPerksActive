@@ -4,16 +4,6 @@ const disqus = "toolgears-com";
 
 module.exports = {
   siteMetadata: {
-    name: "Tools & Gears",
-    title: "Tools & Gears | Best Tools And Gears Reviewed",
-    description: "ToolGears is all about finding the best machines and gears for people out there.",
-    social: {
-      facebook: "www.facebook.com/toolgears",
-      instagram: "www.instagram.com/toolgears",
-      twitter: "",
-      youtube: "",
-    },
-    number: "+92300000002",
     siteURL: siteURL,
     siteUrl: siteURL,
   },
@@ -39,20 +29,6 @@ module.exports = {
       options: {
         path: `${__dirname}/src/posts`,
         name: "posts",
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/src/categories`,
-        name: "categories",
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/src/authors`,
-        name: "authors",
       },
     },
     {

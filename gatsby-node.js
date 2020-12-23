@@ -327,7 +327,7 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
     products: [MdxBody]
     sidebar: Sidebar
     faq: [Faq]
-    productstabletitle: String
+      title: String
   }
 
   type MdxBody {

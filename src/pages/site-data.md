@@ -13,12 +13,12 @@ dmca: true
 dmcaLink: https://www.google.com
 colors:
   background: "#f7f7f7"
-  blockBackground: "#fff"
+  blockBackground: "#fffac"
   headerBackground: "#4f3c8b"
   textColor: "#000"
   btnBackground: "#4f3c8b"
   btnHoverBackground: "#6c51bf"
-  btnColor: "#000"
+  btnColor: "#fff"
   navbarShadow: "#828282"
 topNav:
   - title: Learning Guides

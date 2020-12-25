@@ -1,10 +1,7 @@
 ---
 templateKey: index-page
-seoTitle: Tools & Gears | Best Tools And Gears Reviewed
-seoDescription: ToolGears is all about finding the best machines and gears for people out there.
-categories:
-  - title: Test Category
-    links:
-      - title: Test
-        link: /test/
+seoTitle: Trusted Perks | Top 10 Lists And Reviews
+seoDescription: Trusted Perks is a website for Top 10 Lists with In-Depth
+  Reviews, Pros-Cons And Top 10 Table. We offer Unbiased Product Reviews.
+categories: []
 ---

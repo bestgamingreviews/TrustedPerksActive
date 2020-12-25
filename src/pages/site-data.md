@@ -1,16 +1,16 @@
 ---
 templateKey: site-data
 title: Tools & Gears
-logoSmall: /img/logo.png
+logoSmall: /img/trusted-perks-logo.png
 logoLarge: /img/logo-large.png
-faviconSmall: /img/favicon-16x16.jpg
-faviconLarge: /img/favicon-32x32.jpg
+faviconSmall: /img/favicon-16x16.png
+faviconLarge: /img/favicon-32x32.png
 facebook: https://www.facebook.com/toolgears
 youtube: https://www.youtube.com/toolgears
 twitter: https://www.twitter.com/toolgears
 number: "+923001234567"
 dmca: true
-dmcaLink: https://www.google.com
+dmcaLink: https://www.dmca.com/Protection/Status.aspx?ID=dad0985e-0cc1-450e-a9ce-a1a8b7296e4b
 colors:
   background: "#f7f7f7"
   blockBackground: "#fff"

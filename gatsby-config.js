@@ -1,6 +1,6 @@
 const path = require("path");
-const siteURL = "https://www.toolgears.com";
-const disqus = "toolgears-com";
+const siteURL = "https://www.trustedperks.com";
+const disqus = "trustedperks-com";
 
 module.exports = {
   siteMetadata: {

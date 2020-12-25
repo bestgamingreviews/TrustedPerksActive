@@ -13,7 +13,7 @@ dmca: true
 dmcaLink: https://www.google.com
 colors:
   background: "#f7f7f7"
-  blockBackground: "#fffac"
+  blockBackground: "#fff"
   headerBackground: "#4f3c8b"
   textColor: "#000"
   btnBackground: "#4f3c8b"

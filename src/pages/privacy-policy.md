@@ -2,13 +2,14 @@
 templateKey: default-page
 title: Privacy Policy
 seoTitle: Privacy Policy
-seoDescription: Our Privacy Policy describes everything that we collect in order to keep this website running. If you have an account on this site, or have left comments...
+seoDescription: This is the Privacy Policy Page Of Trusted Perks. Learn how we
+  maintain the privacy of our users.
 schema: ""
 ---
 
 ## Who we are
 
-Our website address is: https://www.toolgears.com/
+Our website address is: https://www.trustedperks.com/
 
 ## What personal data we collect and why we collect it
 

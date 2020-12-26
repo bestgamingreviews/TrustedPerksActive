@@ -1,7 +1,7 @@
 ---
 templateKey: site-data
 title: Tools & Gears
-logoSmall: /img/trusted-perks-logo.png
+logoSmall: /img/logo.png
 logoLarge: /img/logo.png
 faviconSmall: /img/favicon-16x16.png
 faviconLarge: /img/favicon-32x32.png

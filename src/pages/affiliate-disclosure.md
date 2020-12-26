@@ -2,9 +2,9 @@
 templateKey: default-page
 title: Affiliate Disclosure
 seoTitle: Affiliate Disclosure
-seoDescription: These rules are set in place to ensure that readers or viewers
-  of web media are aware if the blogger or publisher is partnered with
-  organizations.
+seoDescription: Amazon and/or other companies pay TrustedPerks a small
+  commission or other compensation for helping to bring customers to their
+  website.
 schema: ""
 ---
 

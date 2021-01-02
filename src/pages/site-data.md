@@ -29,7 +29,7 @@ topNav:
       - title: Ethernet Cables
         link: "#"
         child:
-          - title: Best Cables For Gaming
+          - title: Best For Gaming
             link: /best-ethernet-cables-for-gaming/
           - title: Best For Streaming
             link: /best-ethernet-cables-for-streaming/

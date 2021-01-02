@@ -1,8 +1,8 @@
 ---
 templateKey: site-data
 title: Trusted Perks
-logoSmall: /img/logo-large.png
-logoLarge: /img/logo-large.png
+logoSmall: /img/logo-large-trusted-perks.png
+logoLarge: /img/logo-large-trusted-perks.png
 faviconSmall: /img/favicon-16x16.png
 faviconLarge: /img/favicon-32x32.png
 facebook: https://www.facebook.com/#

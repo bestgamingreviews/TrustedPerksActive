@@ -26,20 +26,13 @@ topNav:
   - title: Buying Guides
     link: /buying-guides/
     child:
-      - title: Miscellaneous
+      - title: Ethernet Cables
         link: "#"
         child:
-          - title: Test Post
-            link: /sample-post-buying/
-          - title: Test Post
-            link: /sample-post-buying/
-      - title: Peripherals
-        link: "#"
-        child:
-          - title: Test Post
-            link: /sample-post-buying/
-          - title: Test Post
-            link: /sample-post-buying/
+          - title: Best Cables For Gaming
+            link: /best-ethernet-cables-for-gaming/
+          - title: Best For Streaming
+            link: /best-ethernet-cables-for-streaming/
 footerNav:
   - title: About Us
     link: /about-us/

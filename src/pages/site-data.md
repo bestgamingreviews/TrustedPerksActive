@@ -5,12 +5,12 @@ logoSmall: /img/logo-large.png
 logoLarge: /img/logo-large.png
 faviconSmall: /img/favicon-16x16.png
 faviconLarge: /img/favicon-32x32.png
-facebook: https://www.facebook.com/toolgears
-youtube: https://www.youtube.com/toolgears
-twitter: https://www.twitter.com/toolgears
+facebook: https://www.facebook.com/#
+youtube: https://www.youtube.com/#
+twitter: https://www.twitter.com/#
 number: "#"
 dmca: true
-dmcaLink: https://www.dmca.com/Protection/Status.aspx?ID=dad0985e-0cc1-450e-a9ce-a1a8b7296e4b
+dmcaLink: "#"
 colors:
   background: "#f7f7f7"
   blockBackground: "#fff"
@@ -21,8 +21,8 @@ colors:
   btnColor: "#fff"
   navbarShadow: "#828282"
 topNav:
-  - title: Learning Guides
-    link: /learning-guides/
+  - title: How To?
+    link: /how-to/
   - title: Buying Guides
     link: /buying-guides/
     child:
@@ -40,10 +40,6 @@ topNav:
             link: /sample-post-buying/
           - title: Test Post
             link: /sample-post-buying/
-  - title: News
-    link: /news/
-  - title: Reviews
-    link: /reviews/
 footerNav:
   - title: About Us
     link: /about-us/

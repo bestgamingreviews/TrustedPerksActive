@@ -47,7 +47,7 @@ table > tbody > tr:last-child {
 .tablepress thead th {
   font-weight: 700;
   vertical-align: middle;
-  color: var(--custom-color-4);
+  color: #FFFFFF;
   background-color: var(--custom-color-3);
   font-size: 18px;
   text-align: center;

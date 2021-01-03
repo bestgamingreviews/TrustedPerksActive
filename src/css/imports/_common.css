@@ -89,7 +89,7 @@ a {
   transition: all 0.3s ease-out;
 }
 a:hover {
-  color: #FFFFFF;
+  color: #4f3c8b;
 }
 a:not(.btn) {
   transition: 0.3s ease;

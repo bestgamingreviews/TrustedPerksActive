@@ -6,24 +6,17 @@ seoDescription: This is the Privacy Policy Page Of Trusted Perks. Learn how we
   maintain the privacy of our users.
 schema: ""
 ---
-
-## Who we are
-
-Our website address is: https://www.trustedperks.com/
+Our website address is: Trustedperks.com
 
 ## What personal data we collect and why we collect it
 
-### Comments
-
 When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor’s IP address and browser user agent string to help spam detection.
 
-An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.
+An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. After approval of your comment, your profile picture is visible to the public in the context of your comment.
 
 ### Media
 
 If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.
-
-## Contact forms
 
 ### Cookies
 
@@ -40,8 +33,6 @@ If you edit or publish an article, an additional cookie will be saved in your br
 Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.
 
 These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.
-
-## Analytics
 
 ### How long we retain your data
 

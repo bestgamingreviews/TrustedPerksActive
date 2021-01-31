@@ -2,8 +2,8 @@
 id: 76f262e1-9325-48ec-beee-f472d201176a
 templateKey: author-page
 title: Ryan
-slug: Ryan
-image: /img/author-erik-bolinder.webp
+slug: ryan
+image: /img/ryan.jpg
 description: Ryan is a 27-Years-Old Tech Blogger from California. He is also a
   Professional Technical Analyst, Specially Gadgets and Computer Stuff. Ryan
   loves Gaming and is currently working as a full time Blogger.

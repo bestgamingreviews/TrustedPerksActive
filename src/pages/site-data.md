@@ -31,8 +31,6 @@ topNav:
         child:
           - title: Best For Gaming
             link: /best-ethernet-cables-for-gaming/
-          - title: Best For Streaming
-            link: /best-ethernet-cables-for-streaming/
 footerNav:
   - title: About Us
     link: /about-us/

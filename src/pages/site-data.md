@@ -7,7 +7,7 @@ faviconSmall: /img/favicon-16x16.png
 faviconLarge: /img/favicon-32x32.png
 facebook: https://www.facebook.com/#
 youtube: https://www.youtube.com/#
-twitter: "@trusted_perks"
+twitter: https://twitter.com/trusted_perks
 number: "#"
 dmca: true
 dmcaLink: "#"
